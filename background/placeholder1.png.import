@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t23wmnenu07x"
-path="res://.godot/imported/angel_warrior1.png-2a1d0e73f04138440c35b48147576410.ctex"
+uid="uid://4ec0p4aansr0"
+path="res://.godot/imported/placeholder1.png-898cf0968ddf95be7be78f260c423153.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/angel_warrior1.png"
-dest_files=["res://.godot/imported/angel_warrior1.png-2a1d0e73f04138440c35b48147576410.ctex"]
+source_file="res://background/placeholder1.png"
+dest_files=["res://.godot/imported/placeholder1.png-898cf0968ddf95be7be78f260c423153.ctex"]
 
 [params]
 

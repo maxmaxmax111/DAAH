@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="DAAH!"
+run/main_scene="uid://7m4beoqmui3e"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 

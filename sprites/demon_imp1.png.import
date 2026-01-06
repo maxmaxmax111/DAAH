@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q0bw8vyn4bfw"
-path.s3tc="res://.godot/imported/demon_sorceror.png-8c1060a8c9e2c36aae295c4879f86cae.s3tc.ctex"
+uid="uid://8ob6kh4pk7qc"
+path.s3tc="res://.godot/imported/demon_imp1.png-08d434a00864ca40f68a0fca88f5f206.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/demon_sorceror.png"
-dest_files=["res://.godot/imported/demon_sorceror.png-8c1060a8c9e2c36aae295c4879f86cae.s3tc.ctex"]
+source_file="res://sprites/demon_imp1.png"
+dest_files=["res://.godot/imported/demon_imp1.png-08d434a00864ca40f68a0fca88f5f206.s3tc.ctex"]
 
 [params]
 

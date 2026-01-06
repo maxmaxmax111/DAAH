@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q0bw8vyn4bfw"
-path.s3tc="res://.godot/imported/demon_sorceror.png-8c1060a8c9e2c36aae295c4879f86cae.s3tc.ctex"
+uid="uid://dmi6wb513ud0e"
+path.s3tc="res://.godot/imported/angel_rook1.png-811fe5f3eb3bd66136576e6c67ddb9c1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/demon_sorceror.png"
-dest_files=["res://.godot/imported/demon_sorceror.png-8c1060a8c9e2c36aae295c4879f86cae.s3tc.ctex"]
+source_file="res://sprites/angel_rook1.png"
+dest_files=["res://.godot/imported/angel_rook1.png-811fe5f3eb3bd66136576e6c67ddb9c1.s3tc.ctex"]
 
 [params]
 
