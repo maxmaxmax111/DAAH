@@ -6,6 +6,7 @@ var board: GameBoard
 @export var dark: bool
 
 @export var tile_id: Vector2i
+var occupied: bool = false
 var occupied_by: ArmyUnit = null
 
 var selected: bool = false
@@ -47,3 +48,14 @@ func deselect_tile():
 func _on_static_body_3d_input_event(camera, event, event_position, normal, shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
 		select_tile()
+
+func occupying_unit() -> ArmyUnit :
+	return occupied_by
+
+func occupy_tile(occupying_unit: ArmyUnit):
+	occupied_by = occupying_unit
+	occupied = true
+
+func free_tile():
+	occupied_by = null
+	occupied = false

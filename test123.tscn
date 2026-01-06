@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgtci3raxjr4x"]
+[gd_scene load_steps=3 format=3 uid="uid://cgtci3raxjr4x"]
 
 [ext_resource type="PackedScene" uid="uid://wa71r20vu782" path="res://board.tscn" id="1_4xb8x"]
+[ext_resource type="Script" uid="uid://ctpn074srd6fh" path="res://match_manager.gd" id="1_ugqhs"]
 
 [node name="test123" type="Node3D"]
+script = ExtResource("1_ugqhs")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.4068937, 6.571144, 4.4888973)
