@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://blpxdr61t4vw2"]
+
+[ext_resource type="Texture2D" uid="uid://cexi6i50pm3lb" path="res://UI/box6px.png" id="1_8qkc7"]
+[ext_resource type="Script" uid="uid://6iyeai48ml5n" path="res://admiral_panel.gd" id="1_blvhj"]
+[ext_resource type="Texture2D" uid="uid://cl43gljoy5wmm" path="res://sprites/aliens/alienAdmiral9.png" id="2_blvhj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4xb8x"]
+texture = ExtResource("1_8qkc7")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[node name="AdmiralPanel" type="HBoxContainer" node_paths=PackedStringArray("speech_text")]
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+script = ExtResource("1_blvhj")
+speech_text = NodePath("TextContainer/RichTextLabel")
+
+[node name="PortraitContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4xb8x")
+
+[node name="TextureRect" type="TextureRect" parent="PortraitContainer"]
+layout_mode = 2
+texture = ExtResource("2_blvhj")
+stretch_mode = 4
+
+[node name="TextContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30

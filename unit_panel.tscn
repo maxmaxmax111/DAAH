@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjl2gsxt4ijby"]
+
+[ext_resource type="Texture2D" uid="uid://cexi6i50pm3lb" path="res://UI/box6px.png" id="1_86h88"]
+[ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="2_d7tl5"]
+[ext_resource type="Script" uid="uid://b1gr6xsmirtxj" path="res://unit_panel.gd" id="2_f65py"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xviyi"]
+texture = ExtResource("1_86h88")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_laak5"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="UnitPanelContainer" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxTexture_xviyi")
+script = ExtResource("2_f65py")
+
+[node name="UnitPanel" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="UnitPortrait" type="TextureRect" parent="UnitPanel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("2_d7tl5")
+expand_mode = 1
+
+[node name="DividerLine" type="Panel" parent="UnitPanel"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_laak5")
+
+[node name="InfoContainer" type="MarginContainer" parent="UnitPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UnitInfoText" type="HBoxContainer" parent="UnitPanel/InfoContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Headers" type="VBoxContainer" parent="UnitPanel/InfoContainer/UnitInfoText"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+alignment = 1
+
+[node name="UnitHeader" type="Label" parent="UnitPanel/InfoContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Unit:"
+horizontal_alignment = 2
+
+[node name="SupplyCostHeader" type="Label" parent="UnitPanel/InfoContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Supply:"
+horizontal_alignment = 2
+
+[node name="SizeHeader" type="Label" parent="UnitPanel/InfoContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Size:"
+horizontal_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitPanel/InfoContainer/UnitInfoText"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+alignment = 1
+
+[node name="UnitName" type="Label" parent="UnitPanel/InfoContainer/UnitInfoText/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Skeleton Warrior"
+
+[node name="UnitSupplyCost" type="Label" parent="UnitPanel/InfoContainer/UnitInfoText/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="UnitSize" type="Label" parent="UnitPanel/InfoContainer/UnitInfoText/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"

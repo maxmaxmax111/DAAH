@@ -1,0 +1,124 @@
+[gd_scene load_steps=6 format=3 uid="uid://c817snna0ec5y"]
+
+[ext_resource type="Script" uid="uid://dfmmeb2skhavm" path="res://draft_army_screen.gd" id="1_ht6w1"]
+[ext_resource type="PackedScene" uid="uid://blpxdr61t4vw2" path="res://admiral_panel.tscn" id="1_ow586"]
+[ext_resource type="PackedScene" uid="uid://d08knuyyvr665" path="res://draft_unit_widget.tscn" id="2_c7hfx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht6w1"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7hfx"]
+bg_color = Color(0, 0.61960787, 0, 1)
+
+[node name="DraftArmyScreen" type="Node3D" node_paths=PackedStringArray("admiral", "total_supply_label", "supply_remaining_label", "unit_widget_container", "unit_widget")]
+script = ExtResource("1_ht6w1")
+admiral = NodePath("CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/AdmiralPanel")
+total_supply_label = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyNumbers/TotalSupply")
+supply_remaining_label = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyNumbers/RemainingSupply")
+unit_widget_container = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons")
+unit_widget = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons/DraftUnitWidget")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ht6w1")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="ArmySupplyHeaders" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyHeaders"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Total Army Supply:"
+
+[node name="Label2" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyHeaders"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Supply Remaining:"
+horizontal_alignment = 2
+
+[node name="ArmySupplyNumbers" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TotalSupply" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyNumbers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "30"
+
+[node name="RemainingSupply" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyNumbers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "30"
+horizontal_alignment = 2
+
+[node name="Separator" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="UnitButtons" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="DraftUnitWidget" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons" instance=ExtResource("2_c7hfx")]
+layout_mode = 2
+
+[node name="Separator2" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="AdmiralPanel" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ow586")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="GoButton" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c7hfx")
+
+[node name="Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/GoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "GO"
+flat = true
