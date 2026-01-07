@@ -1,0 +1,74 @@
+[gd_scene load_steps=16 format=3 uid="uid://da03vsym4xjo3"]
+
+[ext_resource type="Script" uid="uid://k265lagjmplm" path="res://global_unit_info.gd" id="1_yfh7m"]
+[ext_resource type="Texture2D" uid="uid://cl43gljoy5wmm" path="res://sprites/aliens/alienAdmiral9.png" id="2_c3oex"]
+[ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="2_qqwxg"]
+[ext_resource type="Texture2D" uid="uid://8ob6kh4pk7qc" path="res://sprites/demons/demon_imp1.png" id="3_c3oex"]
+[ext_resource type="Texture2D" uid="uid://q0bw8vyn4bfw" path="res://sprites/demons/demon_sorceror.png" id="4_2w734"]
+[ext_resource type="Texture2D" uid="uid://rerqlt1q11rr" path="res://sprites/demons/demon_rook1.png" id="5_pcupn"]
+[ext_resource type="Texture2D" uid="uid://csvr447p6qdv5" path="res://sprites/demons/demon_queen1.png" id="6_6xji6"]
+[ext_resource type="Texture2D" uid="uid://b5i2ghqlrdbrg" path="res://sprites/angels/chrub_archer1.png" id="7_2qx4s"]
+[ext_resource type="Texture2D" uid="uid://t23wmnenu07x" path="res://sprites/angels/angel_knight1.png" id="8_wyeu0"]
+[ext_resource type="Texture2D" uid="uid://b66me76kx0oy3" path="res://sprites/angels/angel_bishop1.png" id="9_insv3"]
+[ext_resource type="Texture2D" uid="uid://dmi6wb513ud0e" path="res://sprites/angels/angel_rook1.png" id="10_16v3k"]
+[ext_resource type="Texture2D" uid="uid://dpfow6cdx575i" path="res://sprites/angels/angel_queen1.png" id="11_2whal"]
+[ext_resource type="Texture2D" uid="uid://bgyl4m7fty38c" path="res://sprites/aliens/alien_soldier1.png" id="12_7h6ef"]
+[ext_resource type="Texture2D" uid="uid://dt25p4gko0b4n" path="res://sprites/humans/human_soldier1.png" id="13_l7osg"]
+[ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_m72vh"]
+
+[node name="UnitInfo" type="Node3D"]
+script = ExtResource("1_yfh7m")
+alien_admiral_portrait = ExtResource("2_c3oex")
+demon_pawn_portrait = ExtResource("2_qqwxg")
+demon_pawn_supply = 1
+demon_pawn_size = 1
+demon_knight_portrait = ExtResource("3_c3oex")
+demon_knight_supply = 2
+demon_knight_size = 1
+demon_bishop_portrait = ExtResource("4_2w734")
+demon_bishop_supply = 3
+demon_bishop_size = 1
+demon_rook_portrait = ExtResource("5_pcupn")
+demon_rook_supply = 5
+demon_rook_size = 2
+demon_queen_portrait = ExtResource("6_6xji6")
+demon_queen_supply = 9
+demon_queen_size = 3
+angel_pawn_portrait = ExtResource("7_2qx4s")
+angel_pawn_supply = 1
+angel_pawn_size = 1
+angel_knight_portrait = ExtResource("8_wyeu0")
+angel_knight_supply = 2
+angel_knight_size = 1
+angel_bishop_portrait = ExtResource("9_insv3")
+angel_bishop_supply = 3
+angel_bishop_size = 1
+angel_rook_portrait = ExtResource("10_16v3k")
+angel_rook_supply = 5
+angel_rook_size = 2
+angel_queen_portrait = ExtResource("11_2whal")
+angel_queen_supply = 9
+angel_queen_size = 3
+alien_pawn_portrait = ExtResource("12_7h6ef")
+alien_pawn_supply = 1
+alien_pawn_size = 1
+alien_knight_supply = 2
+alien_knight_size = 1
+alien_bishop_supply = 3
+alien_bishop_size = 1
+alien_rook_supply = 5
+alien_rook_size = 2
+alien_queen_supply = 9
+alien_queen_size = 3
+human_pawn_portrait = ExtResource("13_l7osg")
+human_pawn_supply = 1
+human_pawn_size = 1
+humandemon_knight_supply = 2
+human_knight_size = 1
+human_bishop_supply = 3
+human_bishop_size = 1
+human_rook_portrait = ExtResource("14_m72vh")
+human_rook_supply = 5
+human_rook_size = 2
+humandemon_queen_supply = 9
+human_queen_size = 3
