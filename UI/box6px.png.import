@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt25p4gko0b4n"
-path="res://.godot/imported/human_soldier1.png-cb594b8bbc1838e87f3e747c40b6f98e.ctex"
+uid="uid://cexi6i50pm3lb"
+path="res://.godot/imported/box6px.png-5671e47de18eb474b7e65b3eb42db7b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/human_soldier1.png"
-dest_files=["res://.godot/imported/human_soldier1.png-cb594b8bbc1838e87f3e747c40b6f98e.ctex"]
+source_file="res://UI/box6px.png"
+dest_files=["res://.godot/imported/box6px.png-5671e47de18eb474b7e65b3eb42db7b3.ctex"]
 
 [params]
 

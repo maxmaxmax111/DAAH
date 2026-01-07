@@ -1,12 +1,141 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgtci3raxjr4x"]
+[gd_scene load_steps=10 format=3 uid="uid://cgtci3raxjr4x"]
 
 [ext_resource type="PackedScene" uid="uid://wa71r20vu782" path="res://board.tscn" id="1_4xb8x"]
 [ext_resource type="Script" uid="uid://ctpn074srd6fh" path="res://match_manager.gd" id="1_ugqhs"]
+[ext_resource type="Texture2D" uid="uid://cexi6i50pm3lb" path="res://UI/box6px.png" id="3_ugqhs"]
+[ext_resource type="Texture2D" uid="uid://cl43gljoy5wmm" path="res://sprites/aliens/alienAdmiral9.png" id="4_hqxlb"]
+[ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="5_xviyi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xb8x"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4xb8x"]
+texture = ExtResource("3_ugqhs")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xviyi"]
+texture = ExtResource("3_ugqhs")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_laak5"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="test123" type="Node3D"]
 script = ExtResource("1_ugqhs")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.4068937, 6.571144, 4.4888973)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.3321495, 6.571144, 4.4888973)
 
 [node name="Board" parent="." instance=ExtResource("1_4xb8x")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BoardFill" type="Control" parent="CanvasLayer/UIContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.57
+
+[node name="RightPanel" type="PanelContainer" parent="CanvasLayer/UIContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.43
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xb8x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel"]
+layout_mode = 2
+
+[node name="AdmiralPanel" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="PortraitContainer" type="PanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4xb8x")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/PortraitContainer"]
+layout_mode = 2
+texture = ExtResource("4_hqxlb")
+
+[node name="TextContainer" type="MarginContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/TextContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+text = "Good day commander. Let's deploy our troops wisely!"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UnitPanelContainer" type="PanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xviyi")
+
+[node name="UnitPanel" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer"]
+layout_mode = 2
+
+[node name="UnitPortrait" type="TextureRect" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer/UnitPanel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("5_xviyi")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer/UnitPanel"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_laak5")
+
+[node name="InfoContainer" type="MarginContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer/UnitPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UnitInfoText" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer/UnitPanel/InfoContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="InfoHeaders" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer/UnitPanel/InfoContainer/UnitInfoText"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme_override_font_sizes/font_size = 30
+text = "Unit:
+Size:"
+horizontal_alignment = 2
+
+[node name="UnitInfo" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer/UnitPanel/InfoContainer/UnitInfoText"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+theme_override_font_sizes/font_size = 30
+text = "Skeleton Warrior
+1"

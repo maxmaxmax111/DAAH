@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5i2ghqlrdbrg"
-path.s3tc="res://.godot/imported/chrub_archer1.png-f59f3488ee9d263fa43cdc23350f0407.s3tc.ctex"
+uid="uid://q0bw8vyn4bfw"
+path.s3tc="res://.godot/imported/demon_sorceror.png-dd33877c660b74bea3039e093d45c4f6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/chrub_archer1.png"
-dest_files=["res://.godot/imported/chrub_archer1.png-f59f3488ee9d263fa43cdc23350f0407.s3tc.ctex"]
+source_file="res://sprites/demons/demon_sorceror.png"
+dest_files=["res://.godot/imported/demon_sorceror.png-dd33877c660b74bea3039e093d45c4f6.s3tc.ctex"]
 
 [params]
 

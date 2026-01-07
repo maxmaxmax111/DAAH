@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csvr447p6qdv5"
-path.s3tc="res://.godot/imported/demon_queen1.png-2c43d477be727797dd0eba5d760d1254.s3tc.ctex"
+uid="uid://t23wmnenu07x"
+path.s3tc="res://.godot/imported/angel_knight1.png-a94519a8a1419758f5d1e9e7fb3fbc18.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/demon_queen1.png"
-dest_files=["res://.godot/imported/demon_queen1.png-2c43d477be727797dd0eba5d760d1254.s3tc.ctex"]
+source_file="res://sprites/angels/angel_knight1.png"
+dest_files=["res://.godot/imported/angel_knight1.png-a94519a8a1419758f5d1e9e7fb3fbc18.s3tc.ctex"]
 
 [params]
 

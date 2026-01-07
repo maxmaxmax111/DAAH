@@ -8,8 +8,9 @@ var board: GameBoard
 
 @export var player_units: Array[ArmyUnit]
 
+
 func _ready():
-	board.board_state = GameBoard.BoardState.DEPLOY
+	pass#board.board_state = GameBoard.BoardState.DEPLOY
 
 func _process(_delta):
 	pass

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy1rpmtcxhp6u"
-path.s3tc="res://.godot/imported/demon_pawn.png-48112f79328fd0efee3f305c94fcab66.s3tc.ctex"
+uid="uid://csvr447p6qdv5"
+path.s3tc="res://.godot/imported/demon_queen1.png-cd37b534273662426b3f2df704babbb7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/demon_pawn.png"
-dest_files=["res://.godot/imported/demon_pawn.png-48112f79328fd0efee3f305c94fcab66.s3tc.ctex"]
+source_file="res://sprites/demons/demon_queen1.png"
+dest_files=["res://.godot/imported/demon_queen1.png-cd37b534273662426b3f2df704babbb7.s3tc.ctex"]
 
 [params]
 
