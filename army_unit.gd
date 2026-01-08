@@ -6,14 +6,14 @@ enum UnitType {DemonPawn, DemonKnight, DemonBishop, DemonRook, DemonQueen, Angel
 @export var unit_type: UnitType:
     set(value):
         unit_type = value
-        update_visuals() # Call a function to handle the visual change
+        update_visuals()
     get:
         return unit_type
 
 var unit_visuals
 
 var unit_size: int = 1
-var board_position: Vector2i
+var board_position: Vector2i # defined by upper left tile for units that are larger than 1 tile
 var player_unit: bool = true # true for local player, false for opponent
 
 func _ready():
