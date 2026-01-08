@@ -10,13 +10,19 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7hfx"]
 bg_color = Color(0, 0.61960787, 0, 1)
 
-[node name="DraftArmyScreen" type="Node3D" node_paths=PackedStringArray("admiral", "total_supply_label", "supply_remaining_label", "unit_widget_container", "unit_widget")]
+[node name="DraftArmyScreen" type="Node3D" node_paths=PackedStringArray("admiral", "total_supply_label", "supply_remaining_label", "unit_widget_container", "pawn_widget", "knight_widget", "bishop_widget", "rook_widget", "queen_widget", "go_button")]
 script = ExtResource("1_ht6w1")
 admiral = NodePath("CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/AdmiralPanel")
 total_supply_label = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyNumbers/TotalSupply")
 supply_remaining_label = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/ArmySupplyNumbers/RemainingSupply")
+total_supply = 40
 unit_widget_container = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons")
-unit_widget = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons/DraftUnitWidget")
+pawn_widget = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons/PawnWidget")
+knight_widget = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons/KnightWidget")
+bishop_widget = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons/BishopWidget")
+rook_widget = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons/RookWidget")
+queen_widget = NodePath("CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons/QueenWidget")
+go_button = NodePath("CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/GoButton/Button")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -104,7 +110,19 @@ size_flags_vertical = 3
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="DraftUnitWidget" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons" instance=ExtResource("2_c7hfx")]
+[node name="PawnWidget" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons" instance=ExtResource("2_c7hfx")]
+layout_mode = 2
+
+[node name="KnightWidget" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons" instance=ExtResource("2_c7hfx")]
+layout_mode = 2
+
+[node name="BishopWidget" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons" instance=ExtResource("2_c7hfx")]
+layout_mode = 2
+
+[node name="RookWidget" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons" instance=ExtResource("2_c7hfx")]
+layout_mode = 2
+
+[node name="QueenWidget" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/UnitButtons" instance=ExtResource("2_c7hfx")]
 layout_mode = 2
 
 [node name="Separator2" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]

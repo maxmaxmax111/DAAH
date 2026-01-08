@@ -10,7 +10,8 @@ var board: GameBoard
 @export var admiral: AdmiralPanel
 
 func _ready():
-	admiral.speak("Good day commander. Deploy your units wisely, failure is not an option!")
+	admiral.set_portrait()
+	admiral.speak("Deploy your units wisely, failure is not an option!")
 	pass#board.board_state = GameBoard.BoardState.DEPLOY
 
 func _process(_delta):

@@ -1,6 +1,7 @@
 extends HBoxContainer
 class_name AdmiralPanel
 
+@export var portrait: TextureRect
 @export var speech_text: RichTextLabel
 @export var speech_speed: float = 0.05
 var speech_index: int = 0
@@ -23,3 +24,14 @@ func speak(_speech):
 	speech_index = 0
 	speech = _speech
 	speaking = true
+
+func set_portrait():
+	match(PlayerArmy.army_type):
+		PlayerArmy.ArmyType.DEMONS:
+			portrait.texture = UnitInfo.demon_admiral_portrait
+		PlayerArmy.ArmyType.ANGELS:
+			portrait.texture = UnitInfo.angel_admiral_portrait
+		PlayerArmy.ArmyType.ALIENS:
+			portrait.texture = UnitInfo.alien_admiral_portrait
+		PlayerArmy.ArmyType.HUMANS:
+			portrait.texture = UnitInfo.human_admiral_portrait

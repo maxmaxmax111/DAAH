@@ -1,10 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://da03vsym4xjo3"]
+[gd_scene load_steps=19 format=3 uid="uid://da03vsym4xjo3"]
 
 [ext_resource type="Script" uid="uid://k265lagjmplm" path="res://global_unit_info.gd" id="1_yfh7m"]
+[ext_resource type="Texture2D" uid="uid://bvm47gxdemaec" path="res://sprites/demons/alien_admiral1.png" id="2_2w734"]
 [ext_resource type="Texture2D" uid="uid://cl43gljoy5wmm" path="res://sprites/aliens/alienAdmiral9.png" id="2_c3oex"]
 [ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="2_qqwxg"]
+[ext_resource type="Texture2D" uid="uid://dqk8p4odcv7aq" path="res://sprites/angels/angel_admiral.png" id="3_6xji6"]
 [ext_resource type="Texture2D" uid="uid://8ob6kh4pk7qc" path="res://sprites/demons/demon_imp1.png" id="3_c3oex"]
 [ext_resource type="Texture2D" uid="uid://q0bw8vyn4bfw" path="res://sprites/demons/demon_sorceror.png" id="4_2w734"]
+[ext_resource type="Texture2D" uid="uid://bfqixp2i3e500" path="res://sprites/humans/human_admiral.png" id="5_2qx4s"]
 [ext_resource type="Texture2D" uid="uid://rerqlt1q11rr" path="res://sprites/demons/demon_rook1.png" id="5_pcupn"]
 [ext_resource type="Texture2D" uid="uid://csvr447p6qdv5" path="res://sprites/demons/demon_queen1.png" id="6_6xji6"]
 [ext_resource type="Texture2D" uid="uid://b5i2ghqlrdbrg" path="res://sprites/angels/chrub_archer1.png" id="7_2qx4s"]
@@ -18,7 +21,10 @@
 
 [node name="UnitInfo" type="Node3D"]
 script = ExtResource("1_yfh7m")
+demon_admiral_portrait = ExtResource("2_2w734")
+angel_admiral_portrait = ExtResource("3_6xji6")
 alien_admiral_portrait = ExtResource("2_c3oex")
+human_admiral_portrait = ExtResource("5_2qx4s")
 demon_pawn_portrait = ExtResource("2_qqwxg")
 demon_pawn_supply = 1
 demon_pawn_size = 1

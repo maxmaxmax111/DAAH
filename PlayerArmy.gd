@@ -1,5 +1,8 @@
 extends Node
 
+enum ArmyType {DEMONS, ANGELS, ALIENS, HUMANS}
+var army_type: ArmyType = ArmyType.ANGELS
+
 var demon_pawns: int = 0
 var demon_knights: int = 0
 var demon_bishops: int = 0
