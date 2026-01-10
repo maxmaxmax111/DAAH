@@ -14,9 +14,13 @@ texture_margin_bottom = 6.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_laak5"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="UnitPanelContainer" type="PanelContainer"]
+[node name="UnitPanelContainer" type="PanelContainer" node_paths=PackedStringArray("unit_portrait", "unit_name", "supply_cost", "unit_size")]
 theme_override_styles/panel = SubResource("StyleBoxTexture_xviyi")
 script = ExtResource("2_f65py")
+unit_portrait = NodePath("UnitPanel/UnitPortrait")
+unit_name = NodePath("UnitPanel/InfoContainer/UnitInfoText/VBoxContainer/UnitName")
+supply_cost = NodePath("UnitPanel/InfoContainer/UnitInfoText/VBoxContainer/UnitSupplyCost")
+unit_size = NodePath("UnitPanel/InfoContainer/UnitInfoText/VBoxContainer/UnitSize")
 
 [node name="UnitPanel" type="HBoxContainer" parent="."]
 layout_mode = 2

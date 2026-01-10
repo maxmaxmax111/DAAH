@@ -8,8 +8,10 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xb8x"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="test123" type="Node3D" node_paths=PackedStringArray("admiral")]
+[node name="test123" type="Node3D" node_paths=PackedStringArray("player_unit_panel", "unit_panel_container", "admiral")]
 script = ExtResource("1_ugqhs")
+player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer")
+unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer")
 admiral = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -53,4 +55,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="UnitPanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_xviyi")]
+visible = false
 layout_mode = 2

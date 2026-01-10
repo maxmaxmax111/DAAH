@@ -7,6 +7,7 @@ var board_state: BoardState = BoardState.IDLE
 
 @export var width: int = 10
 @export var height: int = 10
+@export var unit_dimension: float = 1.0
 var tiles: Array[Array] # board coordinate is denoted as (row#, column#)
 var selected_tiles: Array[BoardTile]
 var highlighted_tiles: Array[BoardTile]
@@ -24,6 +25,8 @@ func _ready():
 func select_tile(board_position: Vector2i):
 	var selected_tile = tiles[board_position.x][board_position.y] as BoardTile
 	match board_state:
+		BoardState.DEPLOY:
+			return
 		BoardState.IDLE:
 			if(!selected_tile.occupied):
 				return
