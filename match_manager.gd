@@ -1,7 +1,7 @@
 extends Node3D
 class_name MatchManager
 
-enum MatchState {DEPLOY, BATTLE}
+enum MatchState {DEPLOY, BATTLE, WAIT_FOR_OPPONENT, PAUSE}
 var match_state: MatchState = MatchState.DEPLOY
 
 var board: GameBoard
@@ -9,119 +9,97 @@ var board: GameBoard
 @export var player_unit_panel: Control
 @export var unit_panel_container: Control
 
-var player_units: Array[ArmyUnit]
 @export var admiral: AdmiralPanel
 
 var unit_instance = preload("res://unit_2d.tscn")
-
+var active_unit: ArmyUnit
 func _ready():
+
 	admiral.set_portrait()
 	#admiral.speak("Deploy your units wisely, failure is not an option!")
 	admiral.speak("A King may move a man, a father may claim a son, but remember that even when those who move you be Kings, or men of power, your soul is in your keeping alone.")
+
+	GlobalSignals.tile_clicked.connect(handle_tile_input)
+
 	for p in range(PlayerArmy.queens):
-		var new_queen = player_unit_panel.duplicate()
-		unit_panel_container.add_child(new_queen)
-		new_queen.supply_cost.text = "9"
-		new_queen.unit_size.text = "3"
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				new_queen.unit_portrait.texture = UnitInfo.demon_queen_portrait
-				new_queen.unit_name.text = UnitInfo.demon_queen_name
+				create_unit_panel(ArmyUnit.UnitType.DemonBishop)
 			PlayerArmy.ArmyType.ANGELS:
-				new_queen.unit_portrait.texture = UnitInfo.angel_queen_portrait
-				new_queen.unit_name.text = UnitInfo.angel_queen_name
+				create_unit_panel(ArmyUnit.UnitType.AngelBishop)
 			PlayerArmy.ArmyType.ALIENS:
-				new_queen.unit_portrait.texture = UnitInfo.alien_queen_portrait
-				new_queen.unit_name.text = UnitInfo.alien_queen_name
+				create_unit_panel(ArmyUnit.UnitType.AlienBishop)
 			PlayerArmy.ArmyType.HUMANS:
-				new_queen.unit_portrait.texture = UnitInfo.human_queen_portrait
-				new_queen.unit_name.text = UnitInfo.human_queen_name
-		new_queen.visible = true
+				create_unit_panel(ArmyUnit.UnitType.HumanBishop)
 	for p in range(PlayerArmy.rooks):
-		var new_rook = player_unit_panel.duplicate()
-		unit_panel_container.add_child(new_rook)
-		new_rook.supply_cost.text = "5"
-		new_rook.unit_size.text = "2"
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				new_rook.unit_portrait.texture = UnitInfo.demon_rook_portrait
-				new_rook.unit_name.text = UnitInfo.demon_rook_name
+				create_unit_panel(ArmyUnit.UnitType.DemonKnight)
 			PlayerArmy.ArmyType.ANGELS:
-				new_rook.unit_portrait.texture = UnitInfo.angel_rook_portrait
-				new_rook.unit_name.text = UnitInfo.angel_rook_name
+				create_unit_panel(ArmyUnit.UnitType.AngelKnight)
 			PlayerArmy.ArmyType.ALIENS:
-				new_rook.unit_portrait.texture = UnitInfo.alien_rook_portrait
-				new_rook.unit_name.text = UnitInfo.alien_rook_name
+				create_unit_panel(ArmyUnit.UnitType.AlienKnight)
 			PlayerArmy.ArmyType.HUMANS:
-				new_rook.unit_portrait.texture = UnitInfo.human_rook_portrait
-				new_rook.unit_name.text = UnitInfo.human_rook_name
-		new_rook.visible = true
+				create_unit_panel(ArmyUnit.UnitType.HumanKnight)
 	for p in range(PlayerArmy.bishops):
-		var new_bishop = player_unit_panel.duplicate()
-		unit_panel_container.add_child(new_bishop)
-		new_bishop.supply_cost.text = "3"
-		new_bishop.unit_size.text = "1"
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				new_bishop.unit_portrait.texture = UnitInfo.demon_bishop_portrait
-				new_bishop.unit_name.text = UnitInfo.demon_bishop_name
+				create_unit_panel(ArmyUnit.UnitType.DemonBishop)
 			PlayerArmy.ArmyType.ANGELS:
-				new_bishop.unit_portrait.texture = UnitInfo.angel_bishop_portrait
-				new_bishop.unit_name.text = UnitInfo.angel_bishop_name
+				create_unit_panel(ArmyUnit.UnitType.AngelBishop)
 			PlayerArmy.ArmyType.ALIENS:
-				new_bishop.unit_portrait.texture = UnitInfo.alien_bishop_portrait
-				new_bishop.unit_name.text = UnitInfo.alien_bishop_name
+				create_unit_panel(ArmyUnit.UnitType.AlienBishop)
 			PlayerArmy.ArmyType.HUMANS:
-				new_bishop.unit_portrait.texture = UnitInfo.human_bishop_portrait
-				new_bishop.unit_name.text = UnitInfo.human_bishop_name
-		new_bishop.visible = true
+				create_unit_panel(ArmyUnit.UnitType.HumanBishop)
 	for p in range(PlayerArmy.knights):
-		var new_knight = player_unit_panel.duplicate()
-		unit_panel_container.add_child(new_knight)
-		new_knight.supply_cost.text = "2"
-		new_knight.unit_size.text = "1"
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				new_knight.unit_portrait.texture = UnitInfo.demon_knight_portrait
-				new_knight.unit_name.text = UnitInfo.demon_knight_name
+				create_unit_panel(ArmyUnit.UnitType.DemonRook)
 			PlayerArmy.ArmyType.ANGELS:
-				new_knight.unit_portrait.texture = UnitInfo.angel_knight_portrait
-				new_knight.unit_name.text = UnitInfo.angel_knight_name
+				create_unit_panel(ArmyUnit.UnitType.AngelRook)
 			PlayerArmy.ArmyType.ALIENS:
-				new_knight.unit_portrait.texture = UnitInfo.alien_knight_portrait
-				new_knight.unit_name.text = UnitInfo.alien_knight_name
+				create_unit_panel(ArmyUnit.UnitType.AlienRook)
 			PlayerArmy.ArmyType.HUMANS:
-				new_knight.unit_portrait.texture = UnitInfo.human_knight_portrait
-				new_knight.unit_name.text = UnitInfo.human_knight_name
-		new_knight.visible = true
+				create_unit_panel(ArmyUnit.UnitType.HumanRook)
 	for p in range(PlayerArmy.pawns):
-		var new_pawn = player_unit_panel.duplicate()
-		unit_panel_container.add_child(new_pawn)
-		new_pawn.supply_cost.text = "1"
-		new_pawn.unit_size.text = "1"
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				new_pawn.unit_portrait.texture = UnitInfo.demon_pawn_portrait
-				new_pawn.unit_name.text = UnitInfo.demon_pawn_name
+				create_unit_panel(ArmyUnit.UnitType.DemonQueen)
 			PlayerArmy.ArmyType.ANGELS:
-				new_pawn.unit_portrait.texture = UnitInfo.angel_pawn_portrait
-				new_pawn.unit_name.text = UnitInfo.angel_pawn_name
+				create_unit_panel(ArmyUnit.UnitType.AngelQueen)
 			PlayerArmy.ArmyType.ALIENS:
-				new_pawn.unit_portrait.texture = UnitInfo.alien_pawn_portrait
-				new_pawn.unit_name.text = UnitInfo.alien_pawn_name
+				create_unit_panel(ArmyUnit.UnitType.AlienQueen)
 			PlayerArmy.ArmyType.HUMANS:
-				new_pawn.unit_portrait.texture = UnitInfo.human_pawn_portrait
-				new_pawn.unit_name.text = UnitInfo.human_pawn_name
-		new_pawn.visible = true
+				create_unit_panel(ArmyUnit.UnitType.HumanQueen)
+
+func create_unit_panel(unit_type: ArmyUnit.UnitType):
+	var new_panel = player_unit_panel.duplicate()
+	unit_panel_container.add_child(new_panel)
+	new_panel.initialize(unit_type)
+	new_panel.visible = true
 
 func _process(_delta):
 	pass
 
-func deploy_unit(location: Vector2i, unit_type: ArmyUnit.UnitType):
+func deploy_unit(unit_type: ArmyUnit.UnitType):
 	var new_unit = unit_instance.duplicate()
 	add_child(new_unit)
 	new_unit.unit_type = unit_type
-	var real_position = board.get_3d_position(location)
+	var real_position = board.get_3d_position(board.active_tile.tile_id)
 	new_unit.set_3d_position(real_position)
 	new_unit.update_visuals(unit_type)
 	new_unit.visible = true
+	new_unit.board_position = board.active_tile.tile_id
+	PlayerArmy.army.append(new_unit)
+
+	board.occupy_tiles(board.active_tile, new_unit)
+	board.deselect_tiles()
+
+func handle_tile_input(tile_coord):
+	match(match_state):
+		MatchState.DEPLOY:
+			if(board.is_space_occupied(tile_coord, active_unit.unit_size)):
+				return
+			board.select_tiles(tile_coord, active_unit.unit_size)
+		_:
+			pass

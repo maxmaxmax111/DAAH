@@ -8,3 +8,5 @@ var knights: int = 0
 var bishops: int = 0
 var rooks: int = 0
 var queens: int = 0
+
+var army: Array[ArmyUnit]

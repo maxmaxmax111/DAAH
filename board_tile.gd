@@ -9,9 +9,7 @@ var board: GameBoard
 var occupied: bool = false
 var occupied_by: ArmyUnit = null
 
-var selected: bool = false
-
-@export var selected_color: Color = Color.PURPLE
+@export var highlight_color: Color = Color.PURPLE
 @export var occupied_by_ally_color: Color = Color.GREEN
 @export var occupied_by_enemy_color: Color = Color.RED
 @export var default_color: Color = Color.GRAY
@@ -28,17 +26,13 @@ func update_shade():
 	mat.albedo_color = new_color
 	set_surface_override_material(0, mat)
 
-func select_tile():
-	if(selected):
-		return
-	selected = true
+func highlight():
 	var mat = get_active_material(0).duplicate()
-	mat.albedo_color = selected_color
+	mat.albedo_color = highlight_color
 	set_surface_override_material(0, mat)
 	update_shade()
 
 func deselect_tile():
-	selected = false
 	var mat = get_active_material(0).duplicate()
 	mat.albedo_color = default_color
 	set_surface_override_material(0, mat)

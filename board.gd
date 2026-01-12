@@ -10,6 +10,7 @@ var board_state: BoardState = BoardState.IDLE
 @export var unit_dimension: float = 1.0
 @export var board_thickness: float = 0.2
 var tiles: Array[Array] # board coordinate is denoted as (row#, column#)
+var active_tile: BoardTile
 var selected_tiles: Array[BoardTile]
 var highlighted_tiles: Array[BoardTile]
 var selected_unit: ArmyUnit
@@ -23,40 +24,48 @@ func _ready():
 			row.append(tile)
 		tiles.append(row)
 
-func select_tile(board_position: Vector2i):
-	var selected_tile = tiles[board_position.x][board_position.y] as BoardTile
-	match board_state:
-		BoardState.DEPLOY:
-			return
-		BoardState.IDLE:
-			if(!selected_tile.occupied):
-				return
-			if(selected_tile.occupied_by.player_unit):
-				selected_unit = selected_tile.occupied_by
-			else:
-				return
-			selected_tiles.append(tiles[selected_unit.board_position.x][selected_unit.board_position.y])
-			if(selected_unit.unit_size > 1):
-				selected_tiles.append(tiles[selected_unit.board_position.x][selected_unit.board_position.y+1])
-				selected_tiles.append(tiles[selected_unit.board_position.x+1][selected_unit.board_position.y])
-				selected_tiles.append(tiles[selected_unit.board_position.x+1][selected_unit.board_position.y+1])
-				if(selected_unit.unit_size > 2):
-					selected_tiles.append(tiles[selected_unit.board_position.x][selected_unit.board_position.y+2])
-					selected_tiles.append(tiles[selected_unit.board_position.x+1][selected_unit.board_position.y+2])
-					selected_tiles.append(tiles[selected_unit.board_position.x+2][selected_unit.board_position.y])
-					selected_tiles.append(tiles[selected_unit.board_position.x+2][selected_unit.board_position.y+1])
-					selected_tiles.append(tiles[selected_unit.board_position.x+2][selected_unit.board_position.y+2])
-			for t in selected_tiles:
-				t.select_tile()
+func select_tiles(coord: Vector2i, selection_size: int = 1):
+	active_tile = tiles[coord.x][coord.y]
+	deselect_tiles()
+	selected_tiles = get_tile_group(coord, selection_size)
+	for s in selected_tiles:
+		s.highlight()
 
-		BoardState.UNIT_SELECTED:
-			return
-		BoardState.UNIT_MOVEMENT:
-			return
-		BoardState.UNIT_ATTACK:
-			return
+func deselect_tiles():
+	if(selected_tiles.size() > 0):
+		for s in selected_tiles:
+			s.deselect_tile()
+		selected_tiles.clear()
 
 func get_3d_position(coord: Vector2i):
 	var x_pos = coord.y * unit_dimension
 	var y_pos = coord.x * unit_dimension
 	return Vector3(x_pos,position.y+board_thickness,y_pos)
+
+func is_space_occupied(coord: Vector2i, space_size: int):
+	var space_occupied = false
+	var tile_group = get_tile_group(coord, space_size)
+	for t in tile_group:
+		if(t.occupied):
+			space_occupied = true
+	return space_occupied
+
+func get_tile_group(coord: Vector2i, group_size: int):
+	var tile_group: Array[BoardTile]
+	tile_group.append(tiles[coord.x][coord.y])
+	if(group_size > 1):
+		tile_group.append(tiles[coord.x][coord.y+1])
+		tile_group.append(tiles[coord.x+1][coord.y])
+		tile_group.append(tiles[coord.x+1][coord.y+1])
+	if(group_size > 2):
+		tile_group.append(tiles[coord.x][coord.y+2])
+		tile_group.append(tiles[coord.x+1][coord.y+1])
+		tile_group.append(tiles[coord.x+2][coord.y])
+		tile_group.append(tiles[coord.x+2][coord.y+1])
+		tile_group.append(tiles[coord.x+2][coord.y+2])
+	return tile_group
+
+func occupy_tiles(coord, occupying_unit: ArmyUnit):
+	var tile_group = get_tile_group(coord, occupying_unit.unit_size)
+	for t in tile_group:
+		t.occupy_tile(occupying_unit)
