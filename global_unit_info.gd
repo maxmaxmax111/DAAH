@@ -1,5 +1,7 @@
 extends Node3D
 
+enum UnitType {PAWN, KNIGHT, BISHOP, ROOK, QUEEN}
+
 @export var demon_admiral_portrait: CompressedTexture2D
 @export var angel_admiral_portrait: CompressedTexture2D
 @export var alien_admiral_portrait: CompressedTexture2D

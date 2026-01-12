@@ -39,9 +39,11 @@ stretch_mode = 4
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
+alignment = 1
 
 [node name="InfoHeaders" type="VBoxContainer" parent="Upper/UnitInfo"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Cost" type="Label" parent="Upper/UnitInfo/InfoHeaders"]
 layout_mode = 2
@@ -57,6 +59,7 @@ horizontal_alignment = 2
 
 [node name="InfoNumbers" type="VBoxContainer" parent="Upper/UnitInfo"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Cost" type="Label" parent="Upper/UnitInfo/InfoNumbers"]
 layout_mode = 2

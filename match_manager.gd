@@ -12,9 +12,12 @@ var board: GameBoard
 var player_units: Array[ArmyUnit]
 @export var admiral: AdmiralPanel
 
+var unit_instance = preload("res://unit_2d.tscn")
+
 func _ready():
 	admiral.set_portrait()
-	admiral.speak("Deploy your units wisely, failure is not an option!")
+	#admiral.speak("Deploy your units wisely, failure is not an option!")
+	admiral.speak("A King may move a man, a father may claim a son, but remember that even when those who move you be Kings, or men of power, your soul is in your keeping alone.")
 	for p in range(PlayerArmy.queens):
 		var new_queen = player_unit_panel.duplicate()
 		unit_panel_container.add_child(new_queen)
@@ -113,3 +116,12 @@ func _ready():
 
 func _process(_delta):
 	pass
+
+func deploy_unit(location: Vector2i, unit_type: ArmyUnit.UnitType):
+	var new_unit = unit_instance.duplicate()
+	add_child(new_unit)
+	new_unit.unit_type = unit_type
+	var real_position = board.get_3d_position(location)
+	new_unit.set_3d_position(real_position)
+	new_unit.update_visuals(unit_type)
+	new_unit.visible = true

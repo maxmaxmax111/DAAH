@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1hwcoc54k5sl"]
+[gd_scene load_steps=15 format=3 uid="uid://c1hwcoc54k5sl"]
 
 [ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="1_ihd0r"]
 [ext_resource type="Script" uid="uid://cebf014nci7xb" path="res://army_unit.gd" id="1_kdfgx"]
@@ -11,9 +11,33 @@
 [ext_resource type="Texture2D" uid="uid://b66me76kx0oy3" path="res://sprites/angels/angel_bishop1.png" id="9_nc0xv"]
 [ext_resource type="Texture2D" uid="uid://dmi6wb513ud0e" path="res://sprites/angels/angel_rook1.png" id="10_dsi0f"]
 [ext_resource type="Texture2D" uid="uid://dpfow6cdx575i" path="res://sprites/angels/angel_queen1.png" id="11_3kcvf"]
+[ext_resource type="Texture2D" uid="uid://bgyl4m7fty38c" path="res://sprites/aliens/alien_soldier1.png" id="12_dsi0f"]
+[ext_resource type="Texture2D" uid="uid://dt25p4gko0b4n" path="res://sprites/humans/human_soldier1.png" id="13_3kcvf"]
+[ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_gcm2e"]
 
-[node name="Unit2D" type="Node3D"]
+[node name="Unit2D" type="Node3D" node_paths=PackedStringArray("demon_pawn_visual", "demon_knight_visual", "demon_bishop_visual", "demon_rook_visual", "demon_queen_visual", "angel_pawn_visual", "angel_knight_visual", "angel_bishop_visual", "angel_rook_visual", "angel_queen_visual", "alien_pawn_visual", "alien_knight_visual", "alien_bishop_visual", "alien_rook_visual", "alien_queen_visual", "human_pawn_visual", "human_knight_visual", "human_bishop_visual", "human_rook_visual", "human_queen_visual", "unit_visuals")]
 script = ExtResource("1_kdfgx")
+demon_pawn_visual = NodePath("DemonPawn")
+demon_knight_visual = NodePath("DemonKnight")
+demon_bishop_visual = NodePath("DemonBishop")
+demon_rook_visual = NodePath("DemonRook")
+demon_queen_visual = NodePath("DemonQueen")
+angel_pawn_visual = NodePath("AngelPawn")
+angel_knight_visual = NodePath("AngelKnight")
+angel_bishop_visual = NodePath("AngelBishop")
+angel_rook_visual = NodePath("AngelRook")
+angel_queen_visual = NodePath("AngelQueen")
+alien_pawn_visual = NodePath("AlienPawn")
+alien_knight_visual = NodePath("AleinKnight")
+alien_bishop_visual = NodePath("AlienBishop")
+alien_rook_visual = NodePath("AlienRook")
+alien_queen_visual = NodePath("AlienQueen")
+human_pawn_visual = NodePath("HumanPawn")
+human_knight_visual = NodePath("HumanKnight")
+human_bishop_visual = NodePath("HumanBishop")
+human_rook_visual = NodePath("HumanRook")
+human_queen_visual = NodePath("HumanQueen")
+unit_visuals = [NodePath("DemonPawn"), NodePath("DemonKnight"), NodePath("DemonBishop"), NodePath("DemonRook"), NodePath("DemonQueen"), NodePath("AngelPawn"), NodePath("AngelKnight"), NodePath("AngelBishop"), NodePath("AngelRook"), NodePath("AngelQueen"), NodePath("AlienPawn"), NodePath("AleinKnight"), NodePath("AlienBishop"), NodePath("AlienRook"), NodePath("AlienQueen"), NodePath("HumanPawn"), NodePath("HumanKnight"), NodePath("HumanBishop"), NodePath("HumanRook"), NodePath("HumanQueen")]
 
 [node name="DemonPawn" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
@@ -79,58 +103,58 @@ texture = ExtResource("11_3kcvf")
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("12_dsi0f")
 
 [node name="AleinKnight" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("12_dsi0f")
 
 [node name="AlienBishop" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("12_dsi0f")
 
 [node name="AlienRook" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("12_dsi0f")
 
 [node name="AlienQueen" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("12_dsi0f")
 
 [node name="HumanPawn" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("13_3kcvf")
 
 [node name="HumanKnight" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("13_3kcvf")
 
 [node name="HumanBishop" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("13_3kcvf")
 
 [node name="HumanRook" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
+transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, 0.49690104, 0, 0.39479792)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("14_gcm2e")
 
 [node name="HumanQueen" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
+transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, 0.49629188, 0, 0.41460967)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("1_ihd0r")
+texture = ExtResource("14_gcm2e")

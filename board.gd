@@ -8,6 +8,7 @@ var board_state: BoardState = BoardState.IDLE
 @export var width: int = 10
 @export var height: int = 10
 @export var unit_dimension: float = 1.0
+@export var board_thickness: float = 0.2
 var tiles: Array[Array] # board coordinate is denoted as (row#, column#)
 var selected_tiles: Array[BoardTile]
 var highlighted_tiles: Array[BoardTile]
@@ -54,3 +55,8 @@ func select_tile(board_position: Vector2i):
 			return
 		BoardState.UNIT_ATTACK:
 			return
+
+func get_3d_position(coord: Vector2i):
+	var x_pos = coord.y * unit_dimension
+	var y_pos = coord.x * unit_dimension
+	return Vector3(x_pos,position.y+board_thickness,y_pos)

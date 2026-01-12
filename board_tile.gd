@@ -45,15 +45,15 @@ func deselect_tile():
 	update_shade()
 
 
-func _on_static_body_3d_input_event(camera, event, event_position, normal, shape_idx):
+func _on_static_body_3d_input_event(_camera, event, _event_position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
-		select_tile()
+		GlobalSignals.tile_clicked.emit(tile_id)
 
 func occupying_unit() -> ArmyUnit :
 	return occupied_by
 
-func occupy_tile(occupying_unit: ArmyUnit):
-	occupied_by = occupying_unit
+func occupy_tile(_unit: ArmyUnit):
+	occupied_by = _unit
 	occupied = true
 
 func free_tile():

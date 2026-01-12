@@ -18,6 +18,7 @@ func _process(delta):
 		speech_index += 1
 		speech_text.text = speech.substr(0, speech_index)
 		if(speech_index >= speech.length()):
+			speech_text.text = speech
 			speaking = false
 
 func speak(_speech):
