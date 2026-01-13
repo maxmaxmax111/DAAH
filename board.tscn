@@ -16,950 +16,499 @@ size = Vector3(1, 0.1, 1)
 script = ExtResource("1_psm7c")
 
 [node name="BoardTile" parent="." instance=ExtResource("1_p0ybc")]
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
 
 [node name="BoardTile2" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 1)
 
 [node name="BoardTile3" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 2)
 
 [node name="BoardTile4" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 3)
 
 [node name="BoardTile5" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 4)
 
 [node name="BoardTile6" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 5)
 
 [node name="BoardTile7" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 6)
 
 [node name="BoardTile8" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 7)
 
 [node name="BoardTile9" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 8)
 
 [node name="BoardTile10" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(0, 9)
 
 [node name="BoardTile11" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 0)
 
 [node name="BoardTile12" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 1)
 
 [node name="BoardTile13" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 2)
 
 [node name="BoardTile14" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 3)
 
 [node name="BoardTile15" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 4)
 
 [node name="BoardTile16" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 5)
 
 [node name="BoardTile17" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 6)
 
 [node name="BoardTile18" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 7)
 
 [node name="BoardTile19" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 8)
 
 [node name="BoardTile20" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(1, 9)
 
 [node name="BoardTile21" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 0)
 
 [node name="BoardTile22" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 1)
 
 [node name="BoardTile23" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 2)
 
 [node name="BoardTile24" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 3)
 
 [node name="BoardTile25" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 4)
 
 [node name="BoardTile26" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 5)
 
 [node name="BoardTile27" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 6)
 
 [node name="BoardTile28" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 7)
 
 [node name="BoardTile29" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 8)
 
 [node name="BoardTile30" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 2)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(2, 9)
 
 [node name="BoardTile31" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 0)
 
 [node name="BoardTile32" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 1)
 
 [node name="BoardTile33" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 2)
 
 [node name="BoardTile34" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 3)
 
 [node name="BoardTile35" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 4)
 
 [node name="BoardTile36" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 5)
 
 [node name="BoardTile37" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 6)
 
 [node name="BoardTile38" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 7)
 
 [node name="BoardTile39" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 8)
 
 [node name="BoardTile40" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(3, 9)
 
 [node name="BoardTile41" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 0)
 
 [node name="BoardTile42" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 1)
 
 [node name="BoardTile43" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 2)
 
 [node name="BoardTile44" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 3)
 
 [node name="BoardTile45" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 4)
 
 [node name="BoardTile46" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 5)
 
 [node name="BoardTile47" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 6)
 
 [node name="BoardTile48" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 7)
 
 [node name="BoardTile49" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 8)
 
 [node name="BoardTile50" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(4, 9)
 
 [node name="BoardTile51" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 0)
 
 [node name="BoardTile52" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 1)
 
 [node name="BoardTile53" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 2)
 
 [node name="BoardTile54" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 3)
 
 [node name="BoardTile55" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 4)
 
 [node name="BoardTile56" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 5)
 
 [node name="BoardTile57" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 6)
 
 [node name="BoardTile58" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 7)
 
 [node name="BoardTile59" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 8)
 
 [node name="BoardTile60" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 5)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(5, 9)
 
 [node name="BoardTile61" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 0)
 
 [node name="BoardTile62" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 1)
 
 [node name="BoardTile63" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 2)
 
 [node name="BoardTile64" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 3)
 
 [node name="BoardTile65" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 4)
 
 [node name="BoardTile66" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 5)
 
 [node name="BoardTile67" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 6)
 
 [node name="BoardTile68" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 7)
 
 [node name="BoardTile69" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 8)
 
 [node name="BoardTile70" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(6, 9)
 
 [node name="BoardTile71" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 0)
 
 [node name="BoardTile72" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 7)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 1)
 
 [node name="BoardTile73" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 2)
 
 [node name="BoardTile74" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 3)
 
 [node name="BoardTile75" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 7)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 4)
 
 [node name="BoardTile76" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 7)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 5)
 
 [node name="BoardTile77" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 6)
 
 [node name="BoardTile78" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 7)
 
 [node name="BoardTile79" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 8)
 
 [node name="BoardTile80" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 7)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(7, 9)
 
 [node name="BoardTile81" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 0)
 
 [node name="BoardTile82" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 8)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 1)
 
 [node name="BoardTile83" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 2)
 
 [node name="BoardTile84" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 8)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 3)
 
 [node name="BoardTile85" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 4)
 
 [node name="BoardTile86" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 8)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 5)
 
 [node name="BoardTile87" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 6)
 
 [node name="BoardTile88" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 7)
 
 [node name="BoardTile89" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 8)
 
 [node name="BoardTile90" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(8, 9)
 
 [node name="BoardTile91" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 0)
 
 [node name="BoardTile92" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 9)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 1)
 
 [node name="BoardTile93" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 9)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 2)
 
 [node name="BoardTile94" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 9)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 3)
 
 [node name="BoardTile95" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 9)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 4)
 
 [node name="BoardTile96" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 9)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 5)
 
 [node name="BoardTile97" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 6)
 
 [node name="BoardTile98" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 9)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 7)
 
 [node name="BoardTile99" parent="." instance=ExtResource("1_p0ybc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 9)
 mesh = SubResource("BoxMesh_psm7c")
 dark = true
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+tile_id = Vector2i(9, 8)
 
 [node name="BoardTile100" parent="." instance=ExtResource("1_p0ybc")]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 9, 0, 9)
-dark = false
-tile_id = Vector2i(0, 0)
-selected_color = Color(0.627451, 0.1254902, 0.9411765, 1)
-occupied_by_ally_color = Color(0, 1, 0, 1)
-occupied_by_enemy_color = Color(1, 0, 0, 1)
-default_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+tile_id = Vector2i(9, 9)

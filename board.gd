@@ -28,8 +28,12 @@ func select_tiles(coord: Vector2i, selection_size: int = 1):
 	active_tile = tiles[coord.x][coord.y]
 	deselect_tiles()
 	selected_tiles = get_tile_group(coord, selection_size)
-	for s in selected_tiles:
-		s.highlight()
+	if(selected_tiles == null):
+		return false
+	else:
+		for s in selected_tiles:
+			s.highlight()
+		return true
 
 func deselect_tiles():
 	if(selected_tiles.size() > 0):
@@ -43,6 +47,8 @@ func get_3d_position(coord: Vector2i):
 	return Vector3(x_pos,position.y+board_thickness,y_pos)
 
 func is_space_occupied(coord: Vector2i, space_size: int):
+	if(is_selection_out_of_bounds(coord, space_size)):
+		return true
 	var space_occupied = false
 	var tile_group = get_tile_group(coord, space_size)
 	for t in tile_group:
@@ -51,6 +57,8 @@ func is_space_occupied(coord: Vector2i, space_size: int):
 	return space_occupied
 
 func get_tile_group(coord: Vector2i, group_size: int):
+	if(group_size > 1 && is_selection_out_of_bounds(coord, group_size)):
+		return null
 	var tile_group: Array[BoardTile]
 	tile_group.append(tiles[coord.x][coord.y])
 	if(group_size > 1):
@@ -65,7 +73,15 @@ func get_tile_group(coord: Vector2i, group_size: int):
 		tile_group.append(tiles[coord.x+2][coord.y+2])
 	return tile_group
 
-func occupy_tiles(coord, occupying_unit: ArmyUnit):
-	var tile_group = get_tile_group(coord, occupying_unit.unit_size)
+func occupy_tiles(occupying_unit: ArmyUnit):
+	var tile_group = get_tile_group(occupying_unit.board_position, occupying_unit.unit_size)
 	for t in tile_group:
 		t.occupy_tile(occupying_unit)
+
+func is_selection_out_of_bounds(_coord, _group_size):
+	if(_coord.x + _group_size - 1 >= height):
+		return true
+	elif(_coord.y + _group_size - 1 >= width):
+		return true
+	else:
+		return false

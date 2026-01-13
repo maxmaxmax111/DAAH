@@ -1,29 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgtci3raxjr4x"]
+[gd_scene load_steps=6 format=3 uid="uid://cgtci3raxjr4x"]
 
 [ext_resource type="PackedScene" uid="uid://wa71r20vu782" path="res://board.tscn" id="1_4xb8x"]
 [ext_resource type="Script" uid="uid://ctpn074srd6fh" path="res://match_manager.gd" id="1_ugqhs"]
 [ext_resource type="PackedScene" uid="uid://blpxdr61t4vw2" path="res://admiral_panel.tscn" id="3_hqxlb"]
-[ext_resource type="PackedScene" uid="uid://c1hwcoc54k5sl" path="res://unit_2d.tscn" id="3_xviyi"]
 [ext_resource type="PackedScene" uid="uid://cjl2gsxt4ijby" path="res://unit_panel.tscn" id="5_xviyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xb8x"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="test123" type="Node3D" node_paths=PackedStringArray("player_unit_panel", "unit_panel_container", "admiral")]
+[node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral")]
 script = ExtResource("1_ugqhs")
-player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer/UnitPanelContainer")
-unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer")
+board = NodePath("Board")
+player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer/UnitPanel")
+unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer")
 admiral = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.3321495, 6.571144, 4.4888973)
-
-[node name="Board" parent="." instance=ExtResource("1_4xb8x")]
-
-[node name="Unit2D" parent="Board" instance=ExtResource("3_xviyi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06657195, 0)
-visible = false
-unit_type = 9
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -39,6 +29,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.57
+mouse_filter = 2
 
 [node name="RightPanel" type="PanelContainer" parent="CanvasLayer/UIContainer"]
 layout_mode = 2
@@ -56,10 +47,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer"]
+[node name="UnitPanelContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="UnitPanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_xviyi")]
+[node name="UnitPanel" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer" instance=ExtResource("5_xviyi")]
 visible = false
 layout_mode = 2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.3321495, 6.571144, 4.4888973)
+
+[node name="Board" parent="." instance=ExtResource("1_4xb8x")]
