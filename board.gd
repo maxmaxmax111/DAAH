@@ -46,7 +46,7 @@ func get_3d_position(coord: Vector2i):
 	var y_pos = coord.x * unit_dimension
 	return Vector3(x_pos,position.y+board_thickness,y_pos)
 
-func is_space_occupied(coord: Vector2i, space_size: int):
+func is_space_occupied(coord: Vector2i, space_size: int):#also checks to make sure selection can't be out of bounds (for units with size > 1)
 	if(is_selection_out_of_bounds(coord, space_size)):
 		return true
 	var space_occupied = false
@@ -67,7 +67,7 @@ func get_tile_group(coord: Vector2i, group_size: int):
 		tile_group.append(tiles[coord.x+1][coord.y+1])
 	if(group_size > 2):
 		tile_group.append(tiles[coord.x][coord.y+2])
-		tile_group.append(tiles[coord.x+1][coord.y+1])
+		tile_group.append(tiles[coord.x+1][coord.y+2])
 		tile_group.append(tiles[coord.x+2][coord.y])
 		tile_group.append(tiles[coord.x+2][coord.y+1])
 		tile_group.append(tiles[coord.x+2][coord.y+2])

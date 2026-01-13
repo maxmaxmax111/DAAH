@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://da03vsym4xjo3"]
+[gd_scene load_steps=19 format=3 uid="uid://da03vsym4xjo3"]
 
 [ext_resource type="Script" uid="uid://k265lagjmplm" path="res://global_unit_info.gd" id="1_yfh7m"]
 [ext_resource type="Texture2D" uid="uid://bvm47gxdemaec" path="res://sprites/demons/alien_admiral1.png" id="2_2w734"]
@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://bgyl4m7fty38c" path="res://sprites/aliens/alien_soldier1.png" id="12_7h6ef"]
 [ext_resource type="Texture2D" uid="uid://dt25p4gko0b4n" path="res://sprites/humans/human_soldier1.png" id="13_l7osg"]
 [ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_m72vh"]
-[ext_resource type="PackedScene" uid="uid://wa71r20vu782" path="res://board.tscn" id="19_wyeu0"]
 
 [node name="UnitInfo" type="Node3D"]
 script = ExtResource("1_yfh7m")
@@ -106,6 +105,3 @@ human_queen_portrait = ExtResource("14_m72vh")
 humandemon_queen_supply = 9
 human_queen_size = 3
 human_queen_name = "H.A.L."
-
-[node name="Board" parent="." instance=ExtResource("19_wyeu0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10070801, 0)

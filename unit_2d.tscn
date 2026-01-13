@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_gcm2e"]
 
 [node name="Unit2D" type="Node3D" node_paths=PackedStringArray("demon_pawn_visual", "demon_knight_visual", "demon_bishop_visual", "demon_rook_visual", "demon_queen_visual", "angel_pawn_visual", "angel_knight_visual", "angel_bishop_visual", "angel_rook_visual", "angel_queen_visual", "alien_pawn_visual", "alien_knight_visual", "alien_bishop_visual", "alien_rook_visual", "alien_queen_visual", "human_pawn_visual", "human_knight_visual", "human_bishop_visual", "human_rook_visual", "human_queen_visual", "unit_visuals")]
+visible = false
 script = ExtResource("1_kdfgx")
 demon_pawn_visual = NodePath("DemonPawn")
 demon_knight_visual = NodePath("DemonKnight")

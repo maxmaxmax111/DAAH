@@ -11,6 +11,8 @@ var match_state: MatchState = MatchState.DEPLOY
 
 @export var admiral: AdmiralPanel
 
+@export var confirm_button: Button
+
 var unit_instance = preload("res://unit_2d.tscn")
 var active_unit: ArmyUnit
 var deploy_index: int = 0
@@ -19,6 +21,7 @@ func _ready():
 	#admiral.speak("Deploy your units wisely, failure is not an option!")
 	admiral.speak("A King may move a man, a father may claim a son, but remember that even when those who move you be Kings, or men of power, your soul is in your keeping alone.")
 	GlobalSignals.tile_clicked.connect(handle_tile_input)
+	confirm_button.button_up.connect(confirm_action)
 	build_army()
 	set_next_unit_for_deployment()
 func create_unit_panel(unit_type: ArmyUnit.UnitType):
@@ -110,7 +113,7 @@ func add_army_unit(_unit_type: ArmyUnit.UnitType):
 	PlayerArmy.army.append(new_unit)
 
 func deploy_unit():
-	var real_position = board.active_tile.position
+	var real_position = Vector3(board.active_tile.tile_id.y * board.unit_dimension, 0.1, board.active_tile.tile_id.x * board.unit_dimension)
 	active_unit.set_3d_position(real_position)
 	active_unit.board_position = board.active_tile.tile_id
 	active_unit.visible = true
@@ -123,11 +126,27 @@ func handle_tile_input(tile_coord):
 			if(board.is_space_occupied(tile_coord, active_unit.unit_size)):
 				print("space occupied, returning.")
 				return
-			print("selecting tiles")
 			board.select_tiles(tile_coord, active_unit.unit_size)
+			admiral.speech_text.text = "Are you sure?"
+			confirm_button.visible = true
 		_:
 			pass
 
 func set_next_unit_for_deployment():
 	active_unit = PlayerArmy.army[deploy_index]
 	deploy_index += 1
+
+func confirm_action():
+	match(match_state):
+		MatchState.DEPLOY:
+			admiral.speech_text.text = "A fine choice!"
+			deploy_unit()
+			confirm_button.visible = false
+			board.deselect_tiles()
+			if(deploy_index == PlayerArmy.army.size()):
+				admiral.speech_text.text = "Prepare to fight!"
+				match_state = MatchState.BATTLE
+			else:
+				set_next_unit_for_deployment()
+		_:
+			pass

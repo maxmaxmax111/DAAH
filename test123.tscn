@@ -1,19 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgtci3raxjr4x"]
+[gd_scene load_steps=10 format=3 uid="uid://cgtci3raxjr4x"]
 
 [ext_resource type="PackedScene" uid="uid://wa71r20vu782" path="res://board.tscn" id="1_4xb8x"]
 [ext_resource type="Script" uid="uid://ctpn074srd6fh" path="res://match_manager.gd" id="1_ugqhs"]
-[ext_resource type="PackedScene" uid="uid://blpxdr61t4vw2" path="res://admiral_panel.tscn" id="3_hqxlb"]
+[ext_resource type="Script" uid="uid://6iyeai48ml5n" path="res://admiral_panel.gd" id="2_laak5"]
+[ext_resource type="Texture2D" uid="uid://cexi6i50pm3lb" path="res://UI/box6px.png" id="3_duayd"]
+[ext_resource type="Texture2D" uid="uid://cl43gljoy5wmm" path="res://sprites/aliens/alienAdmiral9.png" id="4_1byr1"]
 [ext_resource type="PackedScene" uid="uid://cjl2gsxt4ijby" path="res://unit_panel.tscn" id="5_xviyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xb8x"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4xb8x"]
+texture = ExtResource("3_duayd")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6wue"]
+bg_color = Color(2.2140146e-06, 0.47487658, 0.21647072, 1)
+
+[node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral", "confirm_button")]
 script = ExtResource("1_ugqhs")
 board = NodePath("Board")
 player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer/UnitPanel")
 unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer")
 admiral = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel")
+confirm_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/VBoxContainer/ConfirmButton")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -40,8 +53,48 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4xb8x")
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel"]
 layout_mode = 2
 
-[node name="AdmiralPanel" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer" instance=ExtResource("3_hqxlb")]
+[node name="AdmiralPanel" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer" node_paths=PackedStringArray("portrait", "speech_text")]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+script = ExtResource("2_laak5")
+portrait = NodePath("PortraitContainer/TextureRect")
+speech_text = NodePath("VBoxContainer/TextContainer/RichTextLabel")
+
+[node name="PortraitContainer" type="PanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4xb8x")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/PortraitContainer"]
+layout_mode = 2
+texture = ExtResource("4_1byr1")
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextContainer" type="MarginContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/VBoxContainer/TextContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 30
+
+[node name="ConfirmButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_s6wue")
+text = "YES"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
 layout_mode = 2

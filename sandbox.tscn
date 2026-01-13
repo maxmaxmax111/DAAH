@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://k0vohgvff7ey"]
+
+[ext_resource type="Script" uid="uid://ctfax12vodo36" path="res://sandbox.gd" id="1_3h184"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h184"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cojph"]
+material = SubResource("StandardMaterial3D_3h184")
+
+[node name="sandbox" type="Node3D" node_paths=PackedStringArray("box", "nig", "ger")]
+script = ExtResource("1_3h184")
+box = NodePath("MeshInstance3D")
+nig = NodePath("Button")
+ger = NodePath("Button2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9292293, 0.3695035, 0, -0.3695035, 0.9292293, 0, 1.02771, 1.5258923)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_cojph")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 446.0
+offset_top = 124.0
+offset_right = 481.0
+offset_bottom = 149.0
+theme_override_font_sizes/font_size = 100
+text = "one"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 976.0
+offset_top = 122.0
+offset_right = 1153.0
+offset_bottom = 231.0
+theme_override_font_sizes/font_size = 100
+text = "two"
