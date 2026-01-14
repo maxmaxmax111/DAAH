@@ -85,3 +85,6 @@ func is_selection_out_of_bounds(_coord, _group_size):
 		return true
 	else:
 		return false
+
+func get_tile(_coord: Vector2i):
+	return tiles[_coord.x][_coord.y]

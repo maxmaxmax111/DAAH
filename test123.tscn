@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgtci3raxjr4x"]
+[gd_scene load_steps=12 format=3 uid="uid://cgtci3raxjr4x"]
 
 [ext_resource type="PackedScene" uid="uid://wa71r20vu782" path="res://board.tscn" id="1_4xb8x"]
 [ext_resource type="Script" uid="uid://ctpn074srd6fh" path="res://match_manager.gd" id="1_ugqhs"]
 [ext_resource type="Script" uid="uid://6iyeai48ml5n" path="res://admiral_panel.gd" id="2_laak5"]
 [ext_resource type="Texture2D" uid="uid://cexi6i50pm3lb" path="res://UI/box6px.png" id="3_duayd"]
 [ext_resource type="Texture2D" uid="uid://cl43gljoy5wmm" path="res://sprites/aliens/alienAdmiral9.png" id="4_1byr1"]
-[ext_resource type="PackedScene" uid="uid://cjl2gsxt4ijby" path="res://unit_panel.tscn" id="5_xviyi"]
+[ext_resource type="Script" uid="uid://b1gr6xsmirtxj" path="res://unit_panel.gd" id="5_duayd"]
+[ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="6_1byr1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xb8x"]
 bg_color = Color(0, 0, 0, 1)
@@ -20,11 +21,18 @@ texture_margin_bottom = 6.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6wue"]
 bg_color = Color(2.2140146e-06, 0.47487658, 0.21647072, 1)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xviyi"]
+texture = ExtResource("3_duayd")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
 [node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral", "confirm_button")]
 script = ExtResource("1_ugqhs")
 board = NodePath("Board")
-player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer/UnitPanel")
-unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer")
+player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel")
+unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer")
 admiral = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel")
 confirm_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/VBoxContainer/ConfirmButton")
 
@@ -96,17 +104,119 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_s6wue")
 text = "YES"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="UnitPanelContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer"]
+[node name="UnitPanelContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="UnitPanel" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/ScrollContainer/UnitPanelContainer" instance=ExtResource("5_xviyi")]
+[node name="UnitPanel" type="PanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer" node_paths=PackedStringArray("unit_portrait", "unit_name", "supply_cost", "unit_size", "unit_blurb")]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_xviyi")
+script = ExtResource("5_duayd")
+unit_portrait = NodePath("UnitPanel/UnitPortrait")
+unit_name = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitName")
+supply_cost = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/UnitSupplyCost")
+unit_size = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/UnitSize")
+unit_blurb = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitBlurb")
+
+[node name="UnitPanel" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel"]
+layout_mode = 2
+
+[node name="UnitPortrait" type="TextureRect" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("6_1byr1")
+expand_mode = 1
+
+[node name="InfoContainer" type="MarginContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer"]
+layout_mode = 2
+
+[node name="UnitName" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Skeleton Warrior"
+horizontal_alignment = 1
+
+[node name="UnitInfoText" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Headers" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+alignment = 1
+
+[node name="SupplyCostHeader" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Power:"
+horizontal_alignment = 2
+
+[node name="SizeHeader" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Size:"
+horizontal_alignment = 2
+
+[node name="spacer" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 2
+
+[node name="BlurbHeader" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Info:"
+
+[node name="Stats" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+alignment = 1
+
+[node name="UnitSupplyCost" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="UnitSize" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="spacer" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+
+[node name="UnitBlurb" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+
+[node name="UnitBlurb" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+autowrap_mode = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.3321495, 6.571144, 4.4888973)

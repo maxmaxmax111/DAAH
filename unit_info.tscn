@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://da03vsym4xjo3"]
+[gd_scene load_steps=20 format=3 uid="uid://da03vsym4xjo3"]
 
 [ext_resource type="Script" uid="uid://k265lagjmplm" path="res://global_unit_info.gd" id="1_yfh7m"]
 [ext_resource type="Texture2D" uid="uid://bvm47gxdemaec" path="res://sprites/demons/alien_admiral1.png" id="2_2w734"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bgyl4m7fty38c" path="res://sprites/aliens/alien_soldier1.png" id="12_7h6ef"]
 [ext_resource type="Texture2D" uid="uid://dt25p4gko0b4n" path="res://sprites/humans/human_soldier1.png" id="13_l7osg"]
 [ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_m72vh"]
+[ext_resource type="Texture2D" uid="uid://cvoq3h5u25lom" path="res://sprites/humans/human_queen1png.png" id="19_2qx4s"]
 
 [node name="UnitInfo" type="Node3D"]
 script = ExtResource("1_yfh7m")
@@ -29,42 +30,52 @@ demon_pawn_portrait = ExtResource("2_qqwxg")
 demon_pawn_supply = 1
 demon_pawn_size = 1
 demon_pawn_name = "Skeleton Warrior"
+demon_pawn_blurb = "The animated  dead, a fearsome frontline fighter! What is dead my never die..."
 demon_knight_portrait = ExtResource("3_c3oex")
 demon_knight_supply = 2
 demon_knight_size = 1
 demon_knight_name = "Nefarious Imp"
+demon_Knight_blurb = "This trickster may surprise you. If you can't predict him, neither can the enemy!"
 demon_bishop_portrait = ExtResource("4_2w734")
 demon_bishop_supply = 3
 demon_bishop_size = 1
 demon_bishop_name = "Spooky Sorceror"
+demon_bishop_blurb = "A minion of the underworld who has harnessed the magic flames of hell."
 demon_rook_portrait = ExtResource("5_pcupn")
 demon_rook_supply = 5
 demon_rook_size = 2
 demon_rook_name = "Devil's Bodyguard"
+demon_rook_blurb = "His foes tremble when they behold his presence on the battlefield. He is swift and powerful and leaves nothing alive in his path."
 demon_queen_portrait = ExtResource("6_6xji6")
 demon_queen_supply = 9
 demon_queen_size = 3
 demon_queen_name = "Chernabog"
+demon_queen_blurb = "From the deepest depths, Chernabog rises to smite all who stand before him!"
 angel_pawn_portrait = ExtResource("7_2qx4s")
 angel_pawn_supply = 1
 angel_pawn_size = 1
 angel_pawn_name = "Cherub"
+angel_pawn_blurb = "Cute and cunning, the Cherub rains doom upon the badguys, and brings cheer to his friends."
 angel_knight_portrait = ExtResource("8_wyeu0")
 angel_knight_supply = 2
 angel_knight_size = 1
-angel_knight_name = "Reya"
+angel_knight_name = "Archangel Warrior"
+angel_knight_blurb = "With finnesse and elegance, she brings enemies to a beautiful end."
 angel_bishop_portrait = ExtResource("9_insv3")
 angel_bishop_supply = 3
 angel_bishop_size = 1
-angel_bishop_name = "Michael"
+angel_bishop_name = "Angelic Archer"
+angel_bishop_blurb = "His aim is true as an arrow of God."
 angel_rook_portrait = ExtResource("10_16v3k")
 angel_rook_supply = 5
 angel_rook_size = 2
 angel_rook_name = "Seraphic Sentinel"
+angel_rook_blurb = "A heavenly siege engine which can pack a punch from the skies, and won't fall easily."
 angel_queen_portrait = ExtResource("11_2whal")
 angel_queen_supply = 9
 angel_queen_size = 3
 angel_queen_name = "God"
+angel_queen_blurb = "The beginning and end of all things."
 alien_pawn_portrait = ExtResource("12_7h6ef")
 alien_pawn_supply = 1
 alien_pawn_size = 1
@@ -89,8 +100,8 @@ human_pawn_portrait = ExtResource("13_l7osg")
 human_pawn_supply = 1
 human_pawn_size = 1
 human_pawn_name = "Space Private"
+human_pawn_blurb = "Strength in numbers, united they stand! These soldiers are versatile and can be effective in many scenarios."
 human_knight_portrait = ExtResource("13_l7osg")
-humandemon_knight_supply = 2
 human_knight_size = 1
 human_knight_name = "Space Officer"
 human_bishop_portrait = ExtResource("13_l7osg")
@@ -101,7 +112,8 @@ human_rook_portrait = ExtResource("14_m72vh")
 human_rook_supply = 5
 human_rook_size = 2
 human_rook_name = "Space Tank"
-human_queen_portrait = ExtResource("14_m72vh")
-humandemon_queen_supply = 9
+human_rook_blurb = "It's a tank."
+human_queen_portrait = ExtResource("19_2qx4s")
 human_queen_size = 3
 human_queen_name = "H.A.L."
+human_queen_blurb = "The pinnacle of human engineering, it represents humanity's most lethal threat."

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1hwcoc54k5sl"]
+[gd_scene load_steps=16 format=3 uid="uid://c1hwcoc54k5sl"]
 
 [ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="1_ihd0r"]
 [ext_resource type="Script" uid="uid://cebf014nci7xb" path="res://army_unit.gd" id="1_kdfgx"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bgyl4m7fty38c" path="res://sprites/aliens/alien_soldier1.png" id="12_dsi0f"]
 [ext_resource type="Texture2D" uid="uid://dt25p4gko0b4n" path="res://sprites/humans/human_soldier1.png" id="13_3kcvf"]
 [ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_gcm2e"]
+[ext_resource type="Texture2D" uid="uid://cvoq3h5u25lom" path="res://sprites/humans/human_queen1png.png" id="15_3kcvf"]
 
 [node name="Unit2D" type="Node3D" node_paths=PackedStringArray("demon_pawn_visual", "demon_knight_visual", "demon_bishop_visual", "demon_rook_visual", "demon_queen_visual", "angel_pawn_visual", "angel_knight_visual", "angel_bishop_visual", "angel_rook_visual", "angel_queen_visual", "alien_pawn_visual", "alien_knight_visual", "alien_bishop_visual", "alien_rook_visual", "alien_queen_visual", "human_pawn_visual", "human_knight_visual", "human_bishop_visual", "human_rook_visual", "human_queen_visual", "unit_visuals")]
 visible = false
@@ -65,7 +66,7 @@ sorting_offset = 10.0
 texture = ExtResource("5_3pvqx")
 
 [node name="DemonQueen" type="Sprite3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, 0.3, 0, -0.3, -1.3113417e-08, 0.99177945, 0, 0.8613634)
+transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, 0.3, 0, -0.3, -1.3113417e-08, 0.99177945, 0, 0.97528183)
 visible = false
 sorting_offset = 10.0
 texture = ExtResource("6_jsypw")
@@ -155,7 +156,7 @@ sorting_offset = 10.0
 texture = ExtResource("14_gcm2e")
 
 [node name="HumanQueen" type="Sprite3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, 0.49629188, 0, 0.41460967)
+transform = Transform3D(0.3, 0, 0, 0, -1.3113417e-08, 0.3, 0, -0.3, -1.3113417e-08, 0.94057393, 0, 0.95002663)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("14_gcm2e")
+texture = ExtResource("15_3kcvf")

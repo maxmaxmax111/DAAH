@@ -12,6 +12,8 @@ var supply_remaining : int
 @export var rook_widget: DraftUnitWidget
 @export var queen_widget: DraftUnitWidget
 @export var go_button: Button
+@export var queen_limit: int = 1
+@export var rook_limit: int = 2
 
 enum UnitType {PAWN, KNIGHT, BISHOP, ROOK, QUEEN}
 
@@ -162,8 +164,7 @@ func update_army(change: int, unit_type: UnitType, _unit_widget: DraftUnitWidget
 		return
 	elif(change < 0 && supply_remaining == 0 || change * -1 > supply_remaining):
 		return
-	supply_remaining += change
-	supply_remaining_label.text = str(supply_remaining)
+	
 
 	if(unit_type == UnitType.PAWN):
 		PlayerArmy.pawns += 1 if change < 0 else -1
@@ -175,11 +176,18 @@ func update_army(change: int, unit_type: UnitType, _unit_widget: DraftUnitWidget
 		PlayerArmy.bishops += 1 if change < 0 else -1
 		bishop_widget.unit_count.text = str(PlayerArmy.bishops)
 	elif(unit_type == UnitType.ROOK):
+		if(change<0 && PlayerArmy.rooks == 2):
+			return
 		PlayerArmy.rooks += 1 if change < 0 else -1
 		rook_widget.unit_count.text = str(PlayerArmy.rooks)
 	elif(unit_type == UnitType.QUEEN):
+		if(change<0 && PlayerArmy.queens == 1):
+			return
 		PlayerArmy.queens += 1 if change < 0 else -1
 		queen_widget.unit_count.text = str(PlayerArmy.queens)
+
+	supply_remaining += change
+	supply_remaining_label.text = str(supply_remaining)
 
 	if(supply_remaining == 0):
 		go_button.disabled = false

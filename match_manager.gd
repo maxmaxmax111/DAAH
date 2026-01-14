@@ -28,7 +28,7 @@ func create_unit_panel(unit_type: ArmyUnit.UnitType):
 	var new_panel = player_unit_panel.duplicate()
 	unit_panel_container.add_child(new_panel)
 	new_panel.initialize(unit_type)
-	new_panel.visible = true
+	return new_panel
 
 func _process(_delta):
 	pass
@@ -37,79 +37,79 @@ func build_army():
 	for p in range(PlayerArmy.queens):
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				create_unit_panel(ArmyUnit.UnitType.DemonQueen)
-				add_army_unit(ArmyUnit.UnitType.DemonQueen)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.DemonQueen)
+				add_army_unit(ArmyUnit.UnitType.DemonQueen, new_panel)
 			PlayerArmy.ArmyType.ANGELS:
-				create_unit_panel(ArmyUnit.UnitType.AngelQueen)
-				add_army_unit(ArmyUnit.UnitType.AngelQueen)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AngelQueen)
+				add_army_unit(ArmyUnit.UnitType.AngelQueen, new_panel)
 			PlayerArmy.ArmyType.ALIENS:
-				create_unit_panel(ArmyUnit.UnitType.AlienQueen)
-				add_army_unit(ArmyUnit.UnitType.AlienQueen)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AlienQueen)
+				add_army_unit(ArmyUnit.UnitType.AlienQueen, new_panel)
 			PlayerArmy.ArmyType.HUMANS:
-				create_unit_panel(ArmyUnit.UnitType.HumanQueen)
-				add_army_unit(ArmyUnit.UnitType.HumanQueen)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.HumanQueen)
+				add_army_unit(ArmyUnit.UnitType.HumanQueen, new_panel)
 	for p in range(PlayerArmy.rooks):
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				create_unit_panel(ArmyUnit.UnitType.DemonRook)
-				add_army_unit(ArmyUnit.UnitType.DemonRook)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.DemonRook)
+				add_army_unit(ArmyUnit.UnitType.DemonRook, new_panel)
 			PlayerArmy.ArmyType.ANGELS:
-				create_unit_panel(ArmyUnit.UnitType.AngelRook)
-				add_army_unit(ArmyUnit.UnitType.AngelRook)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AngelRook)
+				add_army_unit(ArmyUnit.UnitType.AngelRook, new_panel)
 			PlayerArmy.ArmyType.ALIENS:
-				create_unit_panel(ArmyUnit.UnitType.AlienRook)
-				add_army_unit(ArmyUnit.UnitType.AlienRook)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AlienRook)
+				add_army_unit(ArmyUnit.UnitType.AlienRook, new_panel)
 			PlayerArmy.ArmyType.HUMANS:
-				create_unit_panel(ArmyUnit.UnitType.HumanRook)
-				add_army_unit(ArmyUnit.UnitType.HumanRook)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.HumanRook)
+				add_army_unit(ArmyUnit.UnitType.HumanRook, new_panel)
 	for p in range(PlayerArmy.bishops):
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				create_unit_panel(ArmyUnit.UnitType.DemonBishop)
-				add_army_unit(ArmyUnit.UnitType.DemonBishop)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.DemonBishop)
+				add_army_unit(ArmyUnit.UnitType.DemonBishop, new_panel)
 			PlayerArmy.ArmyType.ANGELS:
-				create_unit_panel(ArmyUnit.UnitType.AngelBishop)
-				add_army_unit(ArmyUnit.UnitType.AngelBishop)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AngelBishop)
+				add_army_unit(ArmyUnit.UnitType.AngelBishop, new_panel)
 			PlayerArmy.ArmyType.ALIENS:
-				create_unit_panel(ArmyUnit.UnitType.AlienBishop)
-				add_army_unit(ArmyUnit.UnitType.AlienBishop)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AlienBishop)
+				add_army_unit(ArmyUnit.UnitType.AlienBishop, new_panel)
 			PlayerArmy.ArmyType.HUMANS:
-				create_unit_panel(ArmyUnit.UnitType.HumanBishop)
-				add_army_unit(ArmyUnit.UnitType.HumanBishop)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.HumanBishop)
+				add_army_unit(ArmyUnit.UnitType.HumanBishop, new_panel)
 	for p in range(PlayerArmy.knights):
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				create_unit_panel(ArmyUnit.UnitType.DemonKnight)
-				add_army_unit(ArmyUnit.UnitType.DemonKnight)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.DemonKnight)
+				add_army_unit(ArmyUnit.UnitType.DemonKnight, new_panel)
 			PlayerArmy.ArmyType.ANGELS:
-				create_unit_panel(ArmyUnit.UnitType.AngelKnight)
-				add_army_unit(ArmyUnit.UnitType.AngelKnight)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AngelKnight)
+				add_army_unit(ArmyUnit.UnitType.AngelKnight, new_panel)
 			PlayerArmy.ArmyType.ALIENS:
-				create_unit_panel(ArmyUnit.UnitType.AlienKnight)
-				add_army_unit(ArmyUnit.UnitType.AlienKnight)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AlienKnight)
+				add_army_unit(ArmyUnit.UnitType.AlienKnight, new_panel)
 			PlayerArmy.ArmyType.HUMANS:
-				create_unit_panel(ArmyUnit.UnitType.HumanKnight)
-				add_army_unit(ArmyUnit.UnitType.HumanKnight)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.HumanKnight)
+				add_army_unit(ArmyUnit.UnitType.HumanKnight, new_panel)
 	for p in range(PlayerArmy.pawns):
 		match(PlayerArmy.army_type):
 			PlayerArmy.ArmyType.DEMONS:
-				create_unit_panel(ArmyUnit.UnitType.DemonPawn)
-				add_army_unit(ArmyUnit.UnitType.DemonPawn)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.DemonPawn)
+				add_army_unit(ArmyUnit.UnitType.DemonPawn, new_panel)
 			PlayerArmy.ArmyType.ANGELS:
-				create_unit_panel(ArmyUnit.UnitType.AngelPawn)
-				add_army_unit(ArmyUnit.UnitType.AngelPawn)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AngelPawn)
+				add_army_unit(ArmyUnit.UnitType.AngelPawn, new_panel)
 			PlayerArmy.ArmyType.ALIENS:
-				create_unit_panel(ArmyUnit.UnitType.AlienPawn)
-				add_army_unit(ArmyUnit.UnitType.AlienPawn)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.AlienPawn)
+				add_army_unit(ArmyUnit.UnitType.AlienPawn, new_panel)
 			PlayerArmy.ArmyType.HUMANS:
-				create_unit_panel(ArmyUnit.UnitType.HumanPawn)
-				add_army_unit(ArmyUnit.UnitType.HumanPawn)
+				var new_panel = create_unit_panel(ArmyUnit.UnitType.HumanPawn)
+				add_army_unit(ArmyUnit.UnitType.HumanPawn, new_panel)
 
-func add_army_unit(_unit_type: ArmyUnit.UnitType):
+func add_army_unit(_unit_type: ArmyUnit.UnitType, _unit_panel: UnitPanel):
 	var new_unit = unit_instance.instantiate()
 	add_child(new_unit)
 	new_unit.unit_type = _unit_type
-	new_unit.initialize()
+	new_unit.initialize(_unit_panel)
 	PlayerArmy.army.append(new_unit)
 
 func deploy_unit():
@@ -120,7 +120,6 @@ func deploy_unit():
 	board.occupy_tiles(active_unit)
 
 func handle_tile_input(tile_coord):
-	print("Tile clicked: " + str(tile_coord))
 	match(match_state):
 		MatchState.DEPLOY:
 			if(board.is_space_occupied(tile_coord, active_unit.unit_size)):
@@ -129,11 +128,20 @@ func handle_tile_input(tile_coord):
 			board.select_tiles(tile_coord, active_unit.unit_size)
 			admiral.speech_text.text = "Are you sure?"
 			confirm_button.visible = true
+		MatchState.BATTLE:
+			if(active_unit):
+				pass
+			elif(board.is_space_occupied(tile_coord, 1)):
+				active_unit = board.get_tile(tile_coord).occupying_unit()
+				board.select_tiles(active_unit.board_position, active_unit.unit_size)
 		_:
 			pass
 
 func set_next_unit_for_deployment():
+	if(deploy_index > 0):
+		PlayerArmy.army[deploy_index-1].linked_panel.visible = false
 	active_unit = PlayerArmy.army[deploy_index]
+	active_unit.linked_panel.visible = true
 	deploy_index += 1
 
 func confirm_action():
@@ -146,6 +154,7 @@ func confirm_action():
 			if(deploy_index == PlayerArmy.army.size()):
 				admiral.speech_text.text = "Prepare to fight!"
 				match_state = MatchState.BATTLE
+				active_unit = null
 			else:
 				set_next_unit_for_deployment()
 		_:

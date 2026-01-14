@@ -6,9 +6,12 @@ enum UnitType {DemonPawn, DemonKnight, DemonBishop, DemonRook, DemonQueen, Angel
 @export var unit_type: UnitType:
 	set(value):
 		unit_type = value
-		initialize()
+		initialize(null)
 	get:
 		return unit_type
+
+enum Stance {DEFEND, MOVE, ATTACK}
+var stance = Stance.DEFEND
 
 @export var demon_pawn_visual: Node3D
 @export var demon_knight_visual: Node3D
@@ -38,10 +41,13 @@ var unit_size: int = 1
 var board_position: Vector2i # defined by upper left tile for units that are larger than 1 tile
 var player_unit: bool = true # true for local player, false for opponent
 @export var unit_visuals: Array[Node3D]
+var linked_panel: UnitPanel
 
-func initialize():
+func initialize(_unit_panel: UnitPanel):
 	for u in unit_visuals:
 		u.visible = false
+	if(_unit_panel != null):
+		linked_panel = _unit_panel
 	match(unit_type):
 		UnitType.DemonPawn:
 			demon_pawn_visual.visible = true
