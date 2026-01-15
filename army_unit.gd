@@ -10,9 +10,19 @@ enum UnitType {DemonPawn, DemonKnight, DemonBishop, DemonRook, DemonQueen, Angel
 	get:
 		return unit_type
 
+
+
+var unit_size: int = 1
+var board_position: Vector2i # defined by upper left tile for units that are larger than 1 tile
+var player_unit: bool = true # true for local player, false for opponent
+enum Morale {FINE, EXCITED, HOPELESS}
+var morale = Morale.FINE
 enum Stance {DEFEND, MOVE, ATTACK}
 var stance = Stance.DEFEND
-
+var special_ability #some special abilities are active, others are passive, some are offensive some are defensive
+#========visual attributes
+var linked_panel: UnitPanel
+@export var unit_visuals: Array[Node3D]
 @export var demon_pawn_visual: Node3D
 @export var demon_knight_visual: Node3D
 @export var demon_bishop_visual: Node3D
@@ -36,13 +46,7 @@ var stance = Stance.DEFEND
 @export var human_bishop_visual: Node3D
 @export var human_rook_visual: Node3D
 @export var human_queen_visual: Node3D
-
-var unit_size: int = 1
-var board_position: Vector2i # defined by upper left tile for units that are larger than 1 tile
-var player_unit: bool = true # true for local player, false for opponent
-@export var unit_visuals: Array[Node3D]
-var linked_panel: UnitPanel
-
+#========END
 func initialize(_unit_panel: UnitPanel):
 	for u in unit_visuals:
 		u.visible = false
