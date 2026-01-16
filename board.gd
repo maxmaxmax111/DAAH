@@ -13,7 +13,11 @@ var tiles: Array[Array] # board coordinate is denoted as (row#, column#)
 var active_tile: BoardTile
 var selected_tiles: Array[BoardTile]
 var highlighted_tiles: Array[BoardTile]
+var potential_move_tiles: Array[BoardTile]
+var movement_path: Array[Vector2i]
 var selected_unit: ArmyUnit
+
+@export var movement_path_color: Color = Color.BLUE
 
 func _ready():
 	var temp = get_children()
@@ -78,6 +82,12 @@ func occupy_tiles(occupying_unit: ArmyUnit):
 	for t in tile_group:
 		t.occupy_tile(occupying_unit)
 
+func free_tiles(tile_position: Vector2i, size: int):
+	var tile_group = get_tile_group(tile_position, size)
+	if tile_group != null:
+		for t in tile_group:
+			t.free_tile()
+
 func is_selection_out_of_bounds(_coord, _group_size):
 	if(_coord.x + _group_size - 1 >= height):
 		return true
@@ -88,3 +98,174 @@ func is_selection_out_of_bounds(_coord, _group_size):
 
 func get_tile(_coord: Vector2i):
 	return tiles[_coord.x][_coord.y]
+
+func highlight_potential_moves(unit: ArmyUnit):
+	clear_potential_moves()
+	var reachable_tiles = calculate_reachable_tiles(unit)
+	for tile_coord in reachable_tiles:
+		var tile = get_tile(tile_coord)
+		tile.highlight()
+		potential_move_tiles.append(tile)
+
+func clear_potential_moves():
+	for tile in potential_move_tiles:
+		tile.deselect_tile()
+	potential_move_tiles.clear()
+
+func calculate_reachable_tiles(unit: ArmyUnit) -> Array[Vector2i]:
+	var reachable: Array[Vector2i] = []
+	var start_pos = unit.board_position
+
+	# Use BFS to find all reachable tiles
+	var queue: Array = [[start_pos, 0]] # [position, distance]
+	var visited: Dictionary = {start_pos: true}
+
+	while queue.size() > 0:
+		var current = queue.pop_front()
+		var pos: Vector2i = current[0]
+		var dist: int = current[1]
+
+		if dist >= unit.move_speed:
+			continue
+
+		# Check all cardinal directions
+		var directions = [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
+		for direction in directions:
+			var next_pos = pos + direction
+
+			# Check bounds
+			if next_pos.x < 0 or next_pos.x >= height or next_pos.y < 0 or next_pos.y >= width:
+				continue
+
+			# Skip if already visited
+			if visited.has(next_pos):
+				continue
+
+			# Check if path is blocked
+			if unit.flying:
+				# Flying units move as if all tiles are unobstructed
+				# Only restriction: final position must be clear of friendly units
+				if not visited.has(next_pos):
+					visited[next_pos] = true
+					queue.append([next_pos, dist + 1])
+
+					# Check if this could be a final position (reachable destination)
+					# Final position must not be occupied by friendly units (excluding itself)
+					if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit):
+						reachable.append(next_pos)
+			else:
+				# Grounded units need each step clear (excluding itself)
+				if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit):
+					if not visited.has(next_pos):
+						reachable.append(next_pos)
+						visited[next_pos] = true
+						queue.append([next_pos, dist + 1])
+
+	return reachable
+
+func is_space_occupied_by_friendly(coord: Vector2i, space_size: int, is_player_unit: bool, exclude_unit: ArmyUnit = null) -> bool:
+	if is_selection_out_of_bounds(coord, space_size):
+		return true
+
+	var tile_group = get_tile_group(coord, space_size)
+	if tile_group == null:
+		return true
+
+	for t in tile_group:
+		if t.occupied and t.occupied_by != null:
+			# Skip if this is the unit we're excluding (the moving unit itself)
+			if exclude_unit != null and t.occupied_by == exclude_unit:
+				continue
+			# Check if occupied by friendly unit
+			if t.occupied_by.player_unit == is_player_unit:
+				return true
+
+	return false
+
+func is_space_occupied_by_enemy_flying(coord: Vector2i, space_size: int, is_player_unit: bool) -> bool:
+	if is_selection_out_of_bounds(coord, space_size):
+		return false
+
+	var tile_group = get_tile_group(coord, space_size)
+	if tile_group == null:
+		return false
+
+	for t in tile_group:
+		if t.occupied and t.occupied_by != null:
+			# Check if occupied by enemy flying unit
+			if t.occupied_by.player_unit != is_player_unit and t.occupied_by.flying:
+				return true
+
+	return false
+
+func calculate_path(from: Vector2i, to: Vector2i, unit: ArmyUnit) -> Array[Vector2i]:
+	var path: Array[Vector2i] = []
+
+	# Simple pathfinding using BFS
+	var queue: Array = [[from, [from]]]
+	var visited: Dictionary = {from: true}
+
+	while queue.size() > 0:
+		var current = queue.pop_front()
+		var pos: Vector2i = current[0]
+		var current_path: Array = current[1]
+
+		if pos == to:
+			# Convert to typed array
+			for coord in current_path:
+				path.append(coord)
+			break
+
+		var directions = [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
+		for direction in directions:
+			var next_pos = pos + direction
+
+			if next_pos.x < 0 or next_pos.x >= height or next_pos.y < 0 or next_pos.y >= width:
+				continue
+
+			if visited.has(next_pos):
+				continue
+
+			# Check if this tile is reachable based on unit type
+			if unit.flying:
+				# Flying units can path through all tiles (no obstruction checks)
+				visited[next_pos] = true
+				var new_path = current_path.duplicate()
+				new_path.append(next_pos)
+				queue.append([next_pos, new_path])
+			else:
+				# Grounded units need clear path (excluding itself)
+				if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit):
+					visited[next_pos] = true
+					var new_path = current_path.duplicate()
+					new_path.append(next_pos)
+					queue.append([next_pos, new_path])
+
+	return path
+
+func highlight_movement_path(path: Array[Vector2i]):
+	clear_movement_path()
+	movement_path = path.duplicate()
+	for tile_coord in path:
+		var tile = get_tile(tile_coord)
+		var mat = tile.get_active_material(0).duplicate()
+		mat.albedo_color = movement_path_color
+		tile.set_surface_override_material(0, mat)
+		tile.update_shade()
+
+func clear_movement_path():
+	for tile_coord in movement_path:
+		var tile = get_tile(tile_coord)
+		# Check if this tile is still in potential_move_tiles
+		var is_potential_move = false
+		for potential_tile in potential_move_tiles:
+			if potential_tile.tile_id == tile_coord:
+				is_potential_move = true
+				break
+
+		# If it's a potential move tile, re-highlight it; otherwise deselect it
+		if is_potential_move:
+			tile.highlight()
+		else:
+			tile.deselect_tile()
+	movement_path.clear()

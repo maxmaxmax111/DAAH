@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgtci3raxjr4x"]
+[gd_scene load_steps=14 format=3 uid="uid://cgtci3raxjr4x"]
 
 [ext_resource type="PackedScene" uid="uid://wa71r20vu782" path="res://board.tscn" id="1_4xb8x"]
 [ext_resource type="Script" uid="uid://ctpn074srd6fh" path="res://match_manager.gd" id="1_ugqhs"]
@@ -28,13 +28,22 @@ texture_margin_top = 6.0
 texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 
-[node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral", "confirm_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duayd"]
+bg_color = Color(0, 0.485579, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1byr1"]
+bg_color = Color(0.8056598, 0.10184034, 0, 1)
+
+[node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral", "confirm_button", "attack_button", "move_button", "end_turn_button")]
 script = ExtResource("1_ugqhs")
 board = NodePath("Board")
 player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel")
 unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer")
 admiral = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel")
 confirm_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/VBoxContainer/ConfirmButton")
+attack_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons/AttackButton")
+move_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons/MoveButton")
+end_turn_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/EndTurnButton")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -68,6 +77,7 @@ size_flags_stretch_ratio = 0.25
 script = ExtResource("2_laak5")
 portrait = NodePath("PortraitContainer/TextureRect")
 speech_text = NodePath("VBoxContainer/TextContainer/RichTextLabel")
+speech_speed = 0.002
 
 [node name="PortraitContainer" type="PanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel"]
 layout_mode = 2
@@ -109,7 +119,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="UnitPanel" type="PanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer" node_paths=PackedStringArray("unit_portrait", "unit_name", "supply_cost", "unit_size", "unit_blurb")]
+[node name="UnitPanel" type="PanelContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer" node_paths=PackedStringArray("unit_portrait", "unit_name", "supply_cost", "unit_size", "move_speed", "flying_status", "unit_blurb", "order_buttons")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -119,7 +129,10 @@ unit_portrait = NodePath("UnitPanel/UnitPortrait")
 unit_name = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitName")
 supply_cost = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/UnitSupplyCost")
 unit_size = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/UnitSize")
+move_speed = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/MoveSpeed")
+flying_status = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/MoveType")
 unit_blurb = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitBlurb")
+order_buttons = NodePath("UnitPanel/InfoContainer/VBoxContainer/OrderButtons")
 
 [node name="UnitPanel" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel"]
 layout_mode = 2
@@ -168,11 +181,28 @@ text = "Power:"
 horizontal_alignment = 2
 
 [node name="SizeHeader" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 30
 text = "Size:"
+horizontal_alignment = 2
+
+[node name="MoveSpeedHeader" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Move Speed:"
+horizontal_alignment = 2
+
+[node name="MoveTypeHeader" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Move Type:"
 horizontal_alignment = 2
 
 [node name="spacer" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Headers"]
@@ -201,6 +231,17 @@ theme_override_font_sizes/font_size = 30
 text = "1"
 
 [node name="UnitSize" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="MoveSpeed" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="MoveType" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "1"
@@ -209,14 +250,44 @@ text = "1"
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 
-[node name="UnitBlurb" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
+[node name="UnusedUnitBlurb" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 
 [node name="UnitBlurb" type="Label" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 autowrap_mode = 2
+
+[node name="OrderButtons" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoveButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_duayd")
+text = "Move"
+
+[node name="AttackButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_1byr1")
+text = "Attack"
+
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "--End Turn--"
+
+[node name="Control" type="Control" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.3321495, 6.571144, 4.4888973)
