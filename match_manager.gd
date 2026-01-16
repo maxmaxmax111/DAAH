@@ -280,8 +280,8 @@ func confirm_action():
 				# Increment order count
 				orders_issued += 1
 
-				# Clear UI
-				board.clear_movement_path()
+				# Confirm the movement path (keeps it highlighted) and clear potential moves
+				board.confirm_movement_path()
 				board.clear_potential_moves()
 				board.deselect_tiles()
 				confirm_button.visible = false
@@ -580,9 +580,98 @@ func execute_move_order(move_order: Dictionary):
 	# Occupy tiles at final position
 	board.occupy_tiles(unit)
 
+func execute_all_orders_simultaneously(orders: Array[Dictionary]):
+	if orders.size() == 0:
+		return
+
+	# Find the longest path to determine total steps
+	var max_steps = 0
+	for order in orders:
+		var path: Array = order["path"]
+		if path.size() > max_steps:
+			max_steps = path.size()
+
+	# Free all units' current tiles before movement begins
+	for order in orders:
+		var unit: ArmyUnit = order["unit"]
+		board.free_tiles(unit.board_position, unit.unit_size)
+
+	# Track which units have stopped moving (due to collision or reaching destination)
+	var units_stopped: Dictionary = {}
+
+	# Move all units step by step simultaneously
+	for step in range(max_steps):
+		# First, move all units to their next position
+		for order in orders:
+			var unit: ArmyUnit = order["unit"]
+			var path: Array = order["path"]
+
+			# Skip if unit has already stopped or reached destination
+			if units_stopped.has(unit) or step >= path.size():
+				continue
+
+			var step_position: Vector2i = path[step]
+
+			# Update unit position
+			unit.board_position = step_position
+			var real_position = Vector3(step_position.y * board.unit_dimension, 0.1, step_position.x * board.unit_dimension)
+			unit.set_3d_position(real_position)
+
+		# After all units have moved, check for collisions between enemy units
+		for i in range(orders.size()):
+			var unit_a: ArmyUnit = orders[i]["unit"]
+
+			# Skip if already stopped
+			if units_stopped.has(unit_a):
+				continue
+
+			for j in range(i + 1, orders.size()):
+				var unit_b: ArmyUnit = orders[j]["unit"]
+
+				# Skip if already stopped
+				if units_stopped.has(unit_b):
+					continue
+
+				# Only check collision between enemy units of the same movement type
+				if unit_a.player_unit != unit_b.player_unit and unit_a.flying == unit_b.flying:
+					# Check if units occupy overlapping tiles
+					if check_units_overlap(unit_a, unit_b):
+						# Both units stop - melee clash will be resolved later
+						units_stopped[unit_a] = true
+						units_stopped[unit_b] = true
+
+		# Wait for the step delay before next step
+		if step < max_steps - 1:
+			await get_tree().create_timer(move_step_delay).timeout
+
+	# Occupy tiles at final positions for all units
+	for order in orders:
+		var unit: ArmyUnit = order["unit"]
+		board.occupy_tiles(unit)
+
+func check_units_overlap(unit_a: ArmyUnit, unit_b: ArmyUnit) -> bool:
+	# Check if two units occupy any overlapping tiles based on their positions and sizes
+	var a_pos = unit_a.board_position
+	var b_pos = unit_b.board_position
+	var a_size = unit_a.unit_size
+	var b_size = unit_b.unit_size
+
+	# Check for overlap in both dimensions
+	var a_right = a_pos.y + a_size
+	var a_bottom = a_pos.x + a_size
+	var b_right = b_pos.y + b_size
+	var b_bottom = b_pos.x + b_size
+
+	# No overlap if one unit is completely to the side of the other
+	if a_pos.y >= b_right or b_pos.y >= a_right:
+		return false
+	if a_pos.x >= b_bottom or b_pos.x >= a_bottom:
+		return false
+
+	return true
+
 func end_turn():
 	# Clear any pending orders and UI
-	board.clear_movement_path()
 	board.clear_potential_moves()
 	board.deselect_tiles()
 	confirm_button.visible = false
@@ -591,10 +680,23 @@ func end_turn():
 	active_unit = null
 	pending_move_order.clear()
 
-	# Execute all confirmed orders
-	admiral.speech_text.text = "Executing orders..."
+	# Clear all movement paths before executing orders
+	board.clear_all_movement_paths()
+
+	# Generate opponent orders
+	admiral.speech_text.text = "Opponent planning..."
+	var opponent_orders = generate_opponent_orders()
+
+	# Combine player and opponent orders
+	var all_orders: Array[Dictionary] = []
 	for order in confirmed_orders:
-		await execute_move_order(order)
+		all_orders.append(order)
+	for order in opponent_orders:
+		all_orders.append(order)
+
+	# Execute all orders simultaneously
+	admiral.speech_text.text = "Executing orders..."
+	await execute_all_orders_simultaneously(all_orders)
 
 	# Clear confirmed orders
 	confirmed_orders.clear()
@@ -602,14 +704,10 @@ func end_turn():
 	# Reset order count
 	orders_issued = 0
 
-	# Process CPU opponent's turn
-	admiral.speech_text.text = "Opponent's turn..."
-	await process_opponent_turn()
-
 	# Start new turn
 	admiral.speech_text.text = "Your turn! " + str(max_orders_per_turn) + " orders available."
 
-func process_opponent_turn():
+func generate_opponent_orders() -> Array[Dictionary]:
 	# Simple random move orders for CPU
 	var available_units = opponent_army.duplicate()
 	var opponent_orders: Array[Dictionary] = []
@@ -640,6 +738,4 @@ func process_opponent_turn():
 				}
 				opponent_orders.append(order)
 
-	# Execute all opponent orders
-	for order in opponent_orders:
-		await execute_move_order(order)
+	return opponent_orders

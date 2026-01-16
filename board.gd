@@ -15,6 +15,7 @@ var selected_tiles: Array[BoardTile]
 var highlighted_tiles: Array[BoardTile]
 var potential_move_tiles: Array[BoardTile]
 var movement_path: Array[Vector2i]
+var all_movement_paths: Array[Array] # Stores all confirmed movement paths
 var selected_unit: ArmyUnit
 
 @export var movement_path_color: Color = Color.BLUE
@@ -109,7 +110,19 @@ func highlight_potential_moves(unit: ArmyUnit):
 
 func clear_potential_moves():
 	for tile in potential_move_tiles:
-		tile.deselect_tile()
+		# Check if this tile is part of a confirmed movement path
+		var is_in_confirmed_path = false
+		for path in all_movement_paths:
+			for tile_coord in path:
+				if tile.tile_id == tile_coord:
+					is_in_confirmed_path = true
+					break
+			if is_in_confirmed_path:
+				break
+
+		# Only deselect if not part of a confirmed path
+		if not is_in_confirmed_path:
+			tile.deselect_tile()
 	potential_move_tiles.clear()
 
 func calculate_reachable_tiles(unit: ArmyUnit) -> Array[Vector2i]:
@@ -253,6 +266,12 @@ func highlight_movement_path(path: Array[Vector2i]):
 		tile.set_surface_override_material(0, mat)
 		tile.update_shade()
 
+func confirm_movement_path():
+	# Store the current movement path and keep it highlighted
+	if movement_path.size() > 0:
+		all_movement_paths.append(movement_path.duplicate())
+		movement_path.clear()
+
 func clear_movement_path():
 	for tile_coord in movement_path:
 		var tile = get_tile(tile_coord)
@@ -269,3 +288,13 @@ func clear_movement_path():
 		else:
 			tile.deselect_tile()
 	movement_path.clear()
+
+func clear_all_movement_paths():
+	# Clear the current movement path
+	clear_movement_path()
+	# Clear all confirmed movement paths
+	for path in all_movement_paths:
+		for tile_coord in path:
+			var tile = get_tile(tile_coord)
+			tile.deselect_tile()
+	all_movement_paths.clear()
