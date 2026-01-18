@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://da03vsym4xjo3"]
+[gd_scene load_steps=25 format=3 uid="uid://da03vsym4xjo3"]
 
 [ext_resource type="Script" uid="uid://k265lagjmplm" path="res://global_unit_info.gd" id="1_yfh7m"]
 [ext_resource type="Texture2D" uid="uid://bvm47gxdemaec" path="res://sprites/demons/alien_admiral1.png" id="2_2w734"]
@@ -18,7 +18,12 @@
 [ext_resource type="Texture2D" uid="uid://bgyl4m7fty38c" path="res://sprites/aliens/alien_soldier1.png" id="12_7h6ef"]
 [ext_resource type="Texture2D" uid="uid://dt25p4gko0b4n" path="res://sprites/humans/human_soldier1.png" id="13_l7osg"]
 [ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_m72vh"]
+[ext_resource type="Texture2D" uid="uid://b800ivsrij1ka" path="res://sprites/aliens/alien_soldier3.png" id="16_insv3"]
+[ext_resource type="Texture2D" uid="uid://djpvpkvxsuptq" path="res://sprites/aliens/alien_soldier2.png" id="18_16v3k"]
 [ext_resource type="Texture2D" uid="uid://cvoq3h5u25lom" path="res://sprites/humans/human_queen1png.png" id="19_2qx4s"]
+[ext_resource type="Texture2D" uid="uid://c7o2iyrx7kpjh" path="res://sprites/aliens/alien_mothership.png" id="19_16v3k"]
+[ext_resource type="Texture2D" uid="uid://c7wpoj7i5aj7" path="res://sprites/humans/human_drone1.png" id="20_7h6ef"]
+[ext_resource type="Texture2D" uid="uid://d2ln02kab6abb" path="res://sprites/humans/human_soldier2.png" id="21_l7osg"]
 
 [node name="UnitInfo" type="Node3D"]
 script = ExtResource("1_yfh7m")
@@ -74,7 +79,6 @@ angel_knight_supply = 2
 angel_knight_size = 1
 angel_knight_move_speed = 7
 angel_knight_flying = true
-angel_knight_attack_range = 2
 angel_knight_name = "Archangel Warrior"
 angel_knight_blurb = "With finnesse and elegance, she brings enemies to a beautiful end."
 angel_bishop_portrait = ExtResource("9_insv3")
@@ -99,7 +103,7 @@ angel_queen_flying = true
 angel_queen_attack_range = 10
 angel_queen_name = "God"
 angel_queen_blurb = "The beginning and end of all things."
-alien_pawn_portrait = ExtResource("12_7h6ef")
+alien_pawn_portrait = ExtResource("16_insv3")
 alien_pawn_supply = 1
 alien_pawn_size = 1
 alien_pawn_move_speed = 5
@@ -117,37 +121,39 @@ alien_bishop_size = 1
 alien_bishop_move_speed = 5
 alien_bishop_attack_range = 5
 alien_bishop_name = "Alien_Bishop"
-alien_rook_portrait = ExtResource("12_7h6ef")
+alien_rook_portrait = ExtResource("18_16v3k")
 alien_rook_supply = 5
 alien_rook_size = 2
 alien_rook_move_speed = 10
 alien_rook_attack_range = 10
 alien_rook_name = "Alien_Rook"
-alien_queen_portrait = ExtResource("12_7h6ef")
+alien_queen_portrait = ExtResource("19_16v3k")
 alien_queen_supply = 9
 alien_queen_size = 3
 alien_queen_move_speed = 14
 alien_queen_attack_range = 10
 alien_queen_name = "Alien_Queen"
-human_pawn_portrait = ExtResource("13_l7osg")
+human_pawn_portrait = ExtResource("20_7h6ef")
 human_pawn_supply = 1
 human_pawn_size = 1
 human_pawn_move_speed = 5
 human_pawn_attack_range = 5
-human_pawn_name = "Space Private"
-human_pawn_blurb = "Strength in numbers, united they stand! These soldiers are versatile and can be effective in many scenarios."
-human_knight_portrait = ExtResource("13_l7osg")
+human_pawn_name = "Drone"
+human_pawn_blurb = "The drone is a reconnaisance craft that supports allies and disables enemies."
+human_knight_portrait = ExtResource("21_l7osg")
 human_knight_supply = 2
 human_knight_size = 1
 human_knight_move_speed = 5
 human_knight_attack_range = 5
-human_knight_name = "Space Officer"
+human_knight_name = "Shock Trooper"
+human_knight_blurb = "Front line soldier that soars using a jetpack."
 human_bishop_portrait = ExtResource("13_l7osg")
 human_bishop_supply = 3
 human_bishop_size = 1
 human_bishop_move_speed = 5
 human_bishop_attack_range = 5
-human_bishop_name = "Space Captain"
+human_bishop_name = "Universal Marine"
+human_bishop_blurb = "Devastating accuracy from long range."
 human_rook_portrait = ExtResource("14_m72vh")
 human_rook_supply = 5
 human_rook_size = 2

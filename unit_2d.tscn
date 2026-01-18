@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1hwcoc54k5sl"]
+[gd_scene load_steps=21 format=3 uid="uid://c1hwcoc54k5sl"]
 
 [ext_resource type="Texture2D" uid="uid://dy1rpmtcxhp6u" path="res://sprites/demons/demon_pawn.png" id="1_ihd0r"]
 [ext_resource type="Script" uid="uid://cebf014nci7xb" path="res://army_unit.gd" id="1_kdfgx"]
@@ -12,13 +12,18 @@
 [ext_resource type="Texture2D" uid="uid://dmi6wb513ud0e" path="res://sprites/angels/angel_rook1.png" id="10_dsi0f"]
 [ext_resource type="Texture2D" uid="uid://dpfow6cdx575i" path="res://sprites/angels/angel_queen1.png" id="11_3kcvf"]
 [ext_resource type="Texture2D" uid="uid://bgyl4m7fty38c" path="res://sprites/aliens/alien_soldier1.png" id="12_dsi0f"]
+[ext_resource type="Texture2D" uid="uid://b800ivsrij1ka" path="res://sprites/aliens/alien_soldier3.png" id="12_y1x3n"]
 [ext_resource type="Texture2D" uid="uid://dt25p4gko0b4n" path="res://sprites/humans/human_soldier1.png" id="13_3kcvf"]
+[ext_resource type="Texture2D" uid="uid://djpvpkvxsuptq" path="res://sprites/aliens/alien_soldier2.png" id="14_2fjbs"]
 [ext_resource type="Texture2D" uid="uid://5lvmr2f34mny" path="res://sprites/humans/human_rook1.png" id="14_gcm2e"]
+[ext_resource type="Texture2D" uid="uid://c7o2iyrx7kpjh" path="res://sprites/aliens/alien_mothership.png" id="15_2fjbs"]
 [ext_resource type="Texture2D" uid="uid://cvoq3h5u25lom" path="res://sprites/humans/human_queen1png.png" id="15_3kcvf"]
+[ext_resource type="Texture2D" uid="uid://c7wpoj7i5aj7" path="res://sprites/humans/human_drone1.png" id="16_ip7g5"]
+[ext_resource type="Texture2D" uid="uid://d2ln02kab6abb" path="res://sprites/humans/human_soldier2.png" id="17_t66a0"]
 
-[node name="Unit2D" type="Node3D" node_paths=PackedStringArray("demon_pawn_visual", "demon_knight_visual", "demon_bishop_visual", "demon_rook_visual", "demon_queen_visual", "angel_pawn_visual", "angel_knight_visual", "angel_bishop_visual", "angel_rook_visual", "angel_queen_visual", "alien_pawn_visual", "alien_knight_visual", "alien_bishop_visual", "alien_rook_visual", "alien_queen_visual", "human_pawn_visual", "human_knight_visual", "human_bishop_visual", "human_rook_visual", "human_queen_visual", "unit_visuals")]
-visible = false
+[node name="Unit2D" type="Node3D" node_paths=PackedStringArray("unit_visuals", "demon_pawn_visual", "demon_knight_visual", "demon_bishop_visual", "demon_rook_visual", "demon_queen_visual", "angel_pawn_visual", "angel_knight_visual", "angel_bishop_visual", "angel_rook_visual", "angel_queen_visual", "alien_pawn_visual", "alien_knight_visual", "alien_bishop_visual", "alien_rook_visual", "alien_queen_visual", "human_pawn_visual", "human_knight_visual", "human_bishop_visual", "human_rook_visual", "human_queen_visual")]
 script = ExtResource("1_kdfgx")
+unit_visuals = [NodePath("DemonPawn"), NodePath("DemonKnight"), NodePath("DemonBishop"), NodePath("DemonRook"), NodePath("DemonQueen"), NodePath("AngelPawn"), NodePath("AngelKnight"), NodePath("AngelBishop"), NodePath("AngelRook"), NodePath("AngelQueen"), NodePath("AlienPawn"), NodePath("AleinKnight"), NodePath("AlienBishop"), NodePath("AlienRook"), NodePath("AlienQueen"), NodePath("HumanPawn"), NodePath("HumanKnight"), NodePath("HumanBishop"), NodePath("HumanRook"), NodePath("HumanQueen")]
 demon_pawn_visual = NodePath("DemonPawn")
 demon_knight_visual = NodePath("DemonKnight")
 demon_bishop_visual = NodePath("DemonBishop")
@@ -39,7 +44,6 @@ human_knight_visual = NodePath("HumanKnight")
 human_bishop_visual = NodePath("HumanBishop")
 human_rook_visual = NodePath("HumanRook")
 human_queen_visual = NodePath("HumanQueen")
-unit_visuals = [NodePath("DemonPawn"), NodePath("DemonKnight"), NodePath("DemonBishop"), NodePath("DemonRook"), NodePath("DemonQueen"), NodePath("AngelPawn"), NodePath("AngelKnight"), NodePath("AngelBishop"), NodePath("AngelRook"), NodePath("AngelQueen"), NodePath("AlienPawn"), NodePath("AleinKnight"), NodePath("AlienBishop"), NodePath("AlienRook"), NodePath("AlienQueen"), NodePath("HumanPawn"), NodePath("HumanKnight"), NodePath("HumanBishop"), NodePath("HumanRook"), NodePath("HumanQueen")]
 
 [node name="DemonPawn" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
@@ -105,7 +109,7 @@ texture = ExtResource("11_3kcvf")
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("12_dsi0f")
+texture = ExtResource("12_y1x3n")
 
 [node name="AleinKnight" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
@@ -120,28 +124,28 @@ sorting_offset = 10.0
 texture = ExtResource("12_dsi0f")
 
 [node name="AlienRook" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
+transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, 0.48919725, 0, 0.4980917)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("12_dsi0f")
+texture = ExtResource("14_2fjbs")
 
 [node name="AlienQueen" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
+transform = Transform3D(0.37, 0, 0, 0, -1.6173214e-08, 0.37, 0, -0.37, -1.6173214e-08, 0.9438677, 0, 0.93176734)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("12_dsi0f")
+texture = ExtResource("15_2fjbs")
 
 [node name="HumanPawn" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("13_3kcvf")
+texture = ExtResource("16_ip7g5")
 
 [node name="HumanKnight" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 visible = false
 sorting_offset = 10.0
-texture = ExtResource("13_3kcvf")
+texture = ExtResource("17_t66a0")
 
 [node name="HumanBishop" type="Sprite3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
