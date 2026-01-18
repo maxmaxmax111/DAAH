@@ -16,9 +16,17 @@ var highlighted_tiles: Array[BoardTile]
 var potential_move_tiles: Array[BoardTile]
 var movement_path: Array[Vector2i]
 var all_movement_paths: Array[Array] # Stores all confirmed movement paths
+var pending_move_destinations: Array[Dictionary] # Stores {position, unit_size} for units with confirmed move orders
+var potential_attack_tiles: Array[BoardTile]
+var attack_target_tile: Vector2i = Vector2i(-1, -1)
+var all_attack_targets: Array[Vector2i] # Stores all confirmed attack targets
 var selected_unit: ArmyUnit
 
 @export var movement_path_color: Color = Color.BLUE
+@export var attack_range_color: Color = Color.RED
+@export var attack_target_color: Color = Color.DARK_RED
+@export var attack_projectile_color: Color = Color.MAROON
+@export var attack_step_delay: float = 0.1
 
 func _ready():
 	var temp = get_children()
@@ -164,11 +172,13 @@ func calculate_reachable_tiles(unit: ArmyUnit) -> Array[Vector2i]:
 
 					# Check if this could be a final position (reachable destination)
 					# Final position must not be occupied by friendly units (excluding itself)
-					if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit):
+					# Also check against pending move destinations from this turn
+					if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit) and not is_space_reserved_by_pending_move(next_pos, unit.unit_size):
 						reachable.append(next_pos)
 			else:
 				# Grounded units need each step clear (excluding itself)
-				if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit):
+				# Also check against pending move destinations from this turn
+				if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit) and not is_space_reserved_by_pending_move(next_pos, unit.unit_size):
 					if not visited.has(next_pos):
 						reachable.append(next_pos)
 						visited[next_pos] = true
@@ -194,6 +204,35 @@ func is_space_occupied_by_friendly(coord: Vector2i, space_size: int, is_player_u
 				return true
 
 	return false
+
+func is_space_reserved_by_pending_move(coord: Vector2i, space_size: int) -> bool:
+	# Check if the given position would overlap with any pending move destinations
+	for pending in pending_move_destinations:
+		var pending_pos: Vector2i = pending["position"]
+		var pending_size: int = pending["unit_size"]
+
+		# Check for overlap between the two unit spaces
+		var coord_right = coord.y + space_size
+		var coord_bottom = coord.x + space_size
+		var pending_right = pending_pos.y + pending_size
+		var pending_bottom = pending_pos.x + pending_size
+
+		# No overlap if one is completely to the side of the other
+		if coord.y >= pending_right or pending_pos.y >= coord_right:
+			continue
+		if coord.x >= pending_bottom or pending_pos.x >= coord_bottom:
+			continue
+
+		# Overlap detected
+		return true
+
+	return false
+
+func add_pending_move_destination(dest_position: Vector2i, unit_size: int):
+	pending_move_destinations.append({"position": dest_position, "unit_size": unit_size})
+
+func clear_pending_move_destinations():
+	pending_move_destinations.clear()
 
 func is_space_occupied_by_enemy_flying(coord: Vector2i, space_size: int, is_player_unit: bool) -> bool:
 	if is_selection_out_of_bounds(coord, space_size):
@@ -248,7 +287,8 @@ func calculate_path(from: Vector2i, to: Vector2i, unit: ArmyUnit) -> Array[Vecto
 				queue.append([next_pos, new_path])
 			else:
 				# Grounded units need clear path (excluding itself)
-				if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit):
+				# Also check against pending move destinations from this turn
+				if not is_space_occupied_by_friendly(next_pos, unit.unit_size, unit.player_unit, unit) and not is_space_reserved_by_pending_move(next_pos, unit.unit_size):
 					visited[next_pos] = true
 					var new_path = current_path.duplicate()
 					new_path.append(next_pos)
@@ -298,3 +338,228 @@ func clear_all_movement_paths():
 			var tile = get_tile(tile_coord)
 			tile.deselect_tile()
 	all_movement_paths.clear()
+
+func highlight_attack_range(unit: ArmyUnit):
+	clear_potential_attacks()
+	var attackable_tiles = calculate_attack_tiles(unit)
+	for tile_coord in attackable_tiles:
+		var tile = get_tile(tile_coord)
+		var mat = tile.get_active_material(0).duplicate()
+		mat.albedo_color = attack_range_color
+		tile.set_surface_override_material(0, mat)
+		tile.update_shade()
+		potential_attack_tiles.append(tile)
+
+func calculate_attack_tiles(unit: ArmyUnit) -> Array[Vector2i]:
+	var attackable: Array[Vector2i] = []
+	var start_pos = unit.board_position
+	var attack_range = unit.attack_range
+	var unit_size = unit.unit_size
+	var added_tiles: Dictionary = {} # Track added tiles to avoid duplicates
+
+	if unit_size == 1:
+		# Size 1 unit: center is the tile itself
+		# 8 directions: cardinal + diagonal
+		var directions = [
+			Vector2i(0, 1),   # right
+			Vector2i(0, -1),  # left
+			Vector2i(1, 0),   # down
+			Vector2i(-1, 0),  # up
+			Vector2i(1, 1),   # down-right
+			Vector2i(1, -1),  # down-left
+			Vector2i(-1, 1),  # up-right
+			Vector2i(-1, -1)  # up-left
+		]
+
+		for direction in directions:
+			for dist in range(1, attack_range + 1):
+				var target_pos = start_pos + direction * dist
+
+				# Check bounds
+				if target_pos.x < 0 or target_pos.x >= height or target_pos.y < 0 or target_pos.y >= width:
+					break
+
+				if not added_tiles.has(target_pos):
+					attackable.append(target_pos)
+					added_tiles[target_pos] = true
+
+	elif unit_size == 2:
+		# Size 2 unit: center is at corner joining 4 tiles
+		# The center is at (start_pos.x + 1, start_pos.y + 1) corner
+		# Cardinal directions use "thick" lines (2 tiles wide)
+		# Diagonal directions emanate from the 4 corner tiles
+
+		# Cardinal directions with thick lines
+		# Right (from column start_pos.y + 2, rows start_pos.x and start_pos.x + 1)
+		for dist in range(1, attack_range + 1):
+			var col = start_pos.y + 1 + dist
+			for row_offset in range(2):
+				var target_pos = Vector2i(start_pos.x + row_offset, col)
+				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
+					if not added_tiles.has(target_pos):
+						attackable.append(target_pos)
+						added_tiles[target_pos] = true
+
+		# Left (from column start_pos.y - 1, rows start_pos.x and start_pos.x + 1)
+		for dist in range(1, attack_range + 1):
+			var col = start_pos.y - dist
+			for row_offset in range(2):
+				var target_pos = Vector2i(start_pos.x + row_offset, col)
+				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
+					if not added_tiles.has(target_pos):
+						attackable.append(target_pos)
+						added_tiles[target_pos] = true
+
+		# Down (from row start_pos.x + 2, columns start_pos.y and start_pos.y + 1)
+		for dist in range(1, attack_range + 1):
+			var row = start_pos.x + 1 + dist
+			for col_offset in range(2):
+				var target_pos = Vector2i(row, start_pos.y + col_offset)
+				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
+					if not added_tiles.has(target_pos):
+						attackable.append(target_pos)
+						added_tiles[target_pos] = true
+
+		# Up (from row start_pos.x - 1, columns start_pos.y and start_pos.y + 1)
+		for dist in range(1, attack_range + 1):
+			var row = start_pos.x - dist
+			for col_offset in range(2):
+				var target_pos = Vector2i(row, start_pos.y + col_offset)
+				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
+					if not added_tiles.has(target_pos):
+						attackable.append(target_pos)
+						added_tiles[target_pos] = true
+
+		# Diagonal directions from the 4 corner tiles
+		var corners = [
+			Vector2i(start_pos.x, start_pos.y),         # top-left corner
+			Vector2i(start_pos.x, start_pos.y + 1),     # top-right corner
+			Vector2i(start_pos.x + 1, start_pos.y),     # bottom-left corner
+			Vector2i(start_pos.x + 1, start_pos.y + 1)  # bottom-right corner
+		]
+		var diagonal_dirs = [
+			Vector2i(-1, -1),  # up-left (from top-left corner)
+			Vector2i(-1, 1),   # up-right (from top-right corner)
+			Vector2i(1, -1),   # down-left (from bottom-left corner)
+			Vector2i(1, 1)     # down-right (from bottom-right corner)
+		]
+
+		for i in range(4):
+			var corner = corners[i]
+			var direction = diagonal_dirs[i]
+			for dist in range(1, attack_range + 1):
+				var target_pos = corner + direction * dist
+
+				# Check bounds
+				if target_pos.x < 0 or target_pos.x >= height or target_pos.y < 0 or target_pos.y >= width:
+					break
+
+				if not added_tiles.has(target_pos):
+					attackable.append(target_pos)
+					added_tiles[target_pos] = true
+
+	return attackable
+
+func highlight_attack_target(tile_coord: Vector2i):
+	clear_attack_target()
+	attack_target_tile = tile_coord
+	var tile = get_tile(tile_coord)
+	var mat = tile.get_active_material(0).duplicate()
+	mat.albedo_color = attack_target_color
+	tile.set_surface_override_material(0, mat)
+	tile.update_shade()
+
+func confirm_attack_target():
+	# Store the current attack target and keep it highlighted
+	if attack_target_tile != Vector2i(-1, -1):
+		all_attack_targets.append(attack_target_tile)
+		attack_target_tile = Vector2i(-1, -1)
+
+func clear_attack_target():
+	if attack_target_tile != Vector2i(-1, -1):
+		var tile = get_tile(attack_target_tile)
+		# Check if this tile is still in potential_attack_tiles
+		var is_potential_attack = false
+		for potential_tile in potential_attack_tiles:
+			if potential_tile.tile_id == attack_target_tile:
+				is_potential_attack = true
+				break
+
+		# If it's a potential attack tile, re-highlight it with attack range color; otherwise deselect it
+		if is_potential_attack:
+			var mat = tile.get_active_material(0).duplicate()
+			mat.albedo_color = attack_range_color
+			tile.set_surface_override_material(0, mat)
+			tile.update_shade()
+		else:
+			tile.deselect_tile()
+		attack_target_tile = Vector2i(-1, -1)
+
+func clear_potential_attacks():
+	for tile in potential_attack_tiles:
+		# Check if this tile is part of a confirmed attack target
+		var is_confirmed_target = false
+		for target in all_attack_targets:
+			if tile.tile_id == target:
+				is_confirmed_target = true
+				break
+
+		# Only deselect if not a confirmed target
+		if not is_confirmed_target:
+			tile.deselect_tile()
+	potential_attack_tiles.clear()
+
+func clear_all_attack_targets():
+	# Clear the current attack target
+	clear_attack_target()
+	# Clear all confirmed attack targets
+	for target in all_attack_targets:
+		var tile = get_tile(target)
+		tile.deselect_tile()
+	all_attack_targets.clear()
+
+func highlight_attack_projectile(tile_coord: Vector2i):
+	var tile = get_tile(tile_coord)
+	var mat = tile.get_active_material(0).duplicate()
+	mat.albedo_color = attack_projectile_color
+	tile.set_surface_override_material(0, mat)
+	tile.update_shade()
+
+func clear_attack_projectile(tile_coord: Vector2i):
+	var tile = get_tile(tile_coord)
+	tile.deselect_tile()
+
+func calculate_attack_path(attacker_pos: Vector2i, target_pos: Vector2i, attacker_size: int) -> Array[Vector2i]:
+	# Calculate the path from attacker to target in a straight line
+	var path: Array[Vector2i] = []
+
+	# Determine the direction
+	var diff = target_pos - attacker_pos
+	var direction = Vector2i(sign(diff.x), sign(diff.y))
+
+	# For size 2 units, find the starting position based on direction
+	var start_pos = attacker_pos
+	if attacker_size == 2:
+		# Adjust starting position based on direction
+		if direction.x > 0:
+			start_pos.x += 1
+		if direction.y > 0:
+			start_pos.y += 1
+
+	# Build the path from start to target
+	var current_pos = start_pos + direction
+	while current_pos != target_pos + direction:
+		if current_pos.x < 0 or current_pos.x >= height or current_pos.y < 0 or current_pos.y >= width:
+			break
+		path.append(current_pos)
+		current_pos = current_pos + direction
+
+	return path
+
+func get_unit_on_tile(tile_coord: Vector2i) -> ArmyUnit:
+	if tile_coord.x < 0 or tile_coord.x >= height or tile_coord.y < 0 or tile_coord.y >= width:
+		return null
+	var tile = get_tile(tile_coord)
+	if tile.occupied and tile.occupied_by != null:
+		return tile.occupied_by
+	return null

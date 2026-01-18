@@ -21,6 +21,12 @@ texture_margin_bottom = 6.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6wue"]
 bg_color = Color(2.2140146e-06, 0.47487658, 0.21647072, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duayd"]
+bg_color = Color(0, 0.485579, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1byr1"]
+bg_color = Color(0.8056598, 0.10184034, 0, 1)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xviyi"]
 texture = ExtResource("3_duayd")
 texture_margin_left = 6.0
@@ -28,22 +34,17 @@ texture_margin_top = 6.0
 texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duayd"]
-bg_color = Color(0, 0.485579, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1byr1"]
-bg_color = Color(0.8056598, 0.10184034, 0, 1)
-
-[node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral", "confirm_button", "attack_button", "move_button", "end_turn_button")]
+[node name="test123" type="Node3D" node_paths=PackedStringArray("board", "player_unit_panel", "unit_panel_container", "admiral", "confirm_button", "attack_button", "move_button", "end_turn_button", "order_buttons")]
 script = ExtResource("1_ugqhs")
 board = NodePath("Board")
 player_unit_panel = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel")
 unit_panel_container = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer")
 admiral = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel")
 confirm_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/AdmiralPanel/VBoxContainer/ConfirmButton")
-attack_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons/AttackButton")
-move_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons/MoveButton")
+attack_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/OrderButtons/AttackButton")
+move_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/OrderButtons/MoveButton")
 end_turn_button = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/EndTurnButton")
+order_buttons = NodePath("CanvasLayer/UIContainer/RightPanel/VBoxContainer/OrderButtons")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -114,6 +115,25 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_s6wue")
 text = "YES"
 
+[node name="OrderButtons" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="MoveButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/OrderButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_duayd")
+text = "Move"
+
+[node name="AttackButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/OrderButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_1byr1")
+text = "Attack"
+
 [node name="UnitPanelContainer" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -132,7 +152,7 @@ unit_size = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/U
 move_speed = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/MoveSpeed")
 flying_status = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitInfoText/Stats/MoveType")
 unit_blurb = NodePath("UnitPanel/InfoContainer/VBoxContainer/UnitBlurb")
-order_buttons = NodePath("UnitPanel/InfoContainer/VBoxContainer/OrderButtons")
+order_buttons = NodePath("../../OrderButtons")
 
 [node name="UnitPanel" type="VBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel"]
 layout_mode = 2
@@ -259,25 +279,6 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 autowrap_mode = 2
-
-[node name="OrderButtons" type="HBoxContainer" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MoveButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxFlat_duayd")
-text = "Move"
-
-[node name="AttackButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer/UnitPanelContainer/UnitPanel/UnitPanel/InfoContainer/VBoxContainer/OrderButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxFlat_1byr1")
-text = "Attack"
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/UIContainer/RightPanel/VBoxContainer"]
 layout_mode = 2

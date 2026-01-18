@@ -29,8 +29,12 @@ var deploy_index: int = 0
 var orders_issued: int = 0
 var max_orders_per_turn: int = 2
 var pending_move_order: Dictionary = {} # Stores unit and target position
-var confirmed_orders: Array[Dictionary] = [] # Stores all confirmed orders for this turn
+var pending_attack_order: Dictionary = {} # Stores unit and attack target
+var confirmed_move_orders: Array[Dictionary] = [] # Stores all confirmed move orders for this turn
+var confirmed_attack_orders: Array[Dictionary] = [] # Stores all confirmed attack orders for this turn
+var units_with_orders: Array[ArmyUnit] = [] # Track units that have received an order this turn
 var move_step_delay: float = 0.25 # Time to pause between each movement step
+@export var order_buttons: Control # buttons to control move/attack stance
 
 # Opponent army variables
 var opponent_army_type: PlayerArmy.ArmyType
@@ -192,6 +196,24 @@ func handle_tile_input(tile_coord):
 						admiral.speech_text.text = "Confirm move order?"
 					return
 
+			# If we have a friendly unit selected in ATTACK stance
+			if active_unit != null and active_unit.player_unit and active_unit.stance == ArmyUnit.Stance.ATTACK:
+				# Check if clicking on a potential attack tile
+				var is_valid_attack = false
+				for tile in board.potential_attack_tiles:
+					if tile.tile_id == tile_coord:
+						is_valid_attack = true
+						break
+
+				if is_valid_attack:
+					# Highlight attack target
+					board.highlight_attack_target(tile_coord)
+					pending_attack_order["unit"] = active_unit
+					pending_attack_order["target"] = tile_coord
+					confirm_button.visible = true
+					admiral.speech_text.text = "Confirm attack order?"
+					return
+
 			# Check if clicking on a unit
 			if board.is_space_occupied(tile_coord, 1):
 				var clicked_unit = board.get_tile(tile_coord).occupying_unit()
@@ -203,18 +225,25 @@ func handle_tile_input(tile_coord):
 						active_unit.stance = ArmyUnit.Stance.DEFEND
 						board.clear_potential_moves()
 						board.clear_movement_path()
+						board.clear_potential_attacks()
+						board.clear_attack_target()
 						pending_move_order.clear()
+						pending_attack_order.clear()
 						confirm_button.visible = false
 
 					# Select the new unit
 					active_unit = clicked_unit
-					active_unit.stance = ArmyUnit.Stance.MOVE
 					board.select_tiles(active_unit.board_position, active_unit.unit_size)
 					show_player_unit_panel(active_unit)
 
-					# Highlight potential moves
-					board.highlight_potential_moves(active_unit)
-					admiral.speech_text.text = "Unit selected - Move stance"
+					# Check if unit already has an order
+					if active_unit in units_with_orders:
+						admiral.speak("Unit already has an order this turn")
+					else:
+						# Default to move stance and highlight potential moves
+						active_unit.stance = ArmyUnit.Stance.MOVE
+						board.highlight_potential_moves(active_unit)
+						admiral.speak("Unit is ready to move!")
 
 				# If clicking on enemy unit when no friendly unit is selected
 				elif clicked_unit != null and not clicked_unit.player_unit:
@@ -243,7 +272,7 @@ func show_player_unit_panel(_unit: ArmyUnit):
 	# Show the selected player unit panel
 	_unit.linked_panel.visible = true
 	if(match_state == MatchState.BATTLE):
-		_unit.linked_panel.show_order_buttons(true)
+		order_buttons.visible = true
 
 func show_opponent_unit_panel(_unit: ArmyUnit):
 	# Hide all player unit panels
@@ -256,7 +285,7 @@ func show_opponent_unit_panel(_unit: ArmyUnit):
 	# Show the selected opponent unit panel
 	if _unit.linked_panel:
 		_unit.linked_panel.visible = true
-		_unit.linked_panel.show_order_buttons(false)
+		order_buttons.visible = false
 
 func confirm_action():
 	match(match_state):
@@ -275,7 +304,14 @@ func confirm_action():
 		MatchState.BATTLE:
 			if pending_move_order.has("unit"):
 				# Store the move order instead of executing immediately
-				confirmed_orders.append(pending_move_order.duplicate())
+				confirmed_move_orders.append(pending_move_order.duplicate())
+
+				# Track that this unit has an order
+				units_with_orders.append(pending_move_order["unit"])
+
+				# Register the move destination so other units can't move there this turn
+				var moving_unit: ArmyUnit = pending_move_order["unit"]
+				board.add_pending_move_destination(pending_move_order["target"], moving_unit.unit_size)
 
 				# Increment order count
 				orders_issued += 1
@@ -293,7 +329,32 @@ func confirm_action():
 				if orders_issued >= max_orders_per_turn:
 					end_turn()
 				else:
-					admiral.speech_text.text = "Order confirmed! " + str(max_orders_per_turn - orders_issued) + " orders remaining."
+					admiral.speech_text.text = "Move order confirmed! " + str(max_orders_per_turn - orders_issued) + " orders remaining."
+
+			elif pending_attack_order.has("unit"):
+				# Store the attack order
+				confirmed_attack_orders.append(pending_attack_order.duplicate())
+
+				# Track that this unit has an order
+				units_with_orders.append(pending_attack_order["unit"])
+
+				# Increment order count
+				orders_issued += 1
+
+				# Confirm the attack target (keeps it highlighted) and clear potential attacks
+				board.confirm_attack_target()
+				board.clear_potential_attacks()
+				board.deselect_tiles()
+				confirm_button.visible = false
+				active_unit.stance = ArmyUnit.Stance.DEFEND
+				active_unit = null
+				pending_attack_order.clear()
+
+				# Check if max orders reached
+				if orders_issued >= max_orders_per_turn:
+					end_turn()
+				else:
+					admiral.speech_text.text = "Attack order confirmed! " + str(max_orders_per_turn - orders_issued) + " orders remaining."
 		_:
 			pass
 
@@ -538,16 +599,33 @@ func process_opponent_deployment():
 		print("Warning: Could not find valid deployment position for opponent unit!")
 
 func set_attack_stance():
+	print("setting attack stance")
 	if active_unit != null and active_unit.player_unit:
+		# Check if unit already has an order this turn
+		if active_unit in units_with_orders:
+			admiral.speak("This unit already has an order!")
+			return
 		active_unit.stance = ArmyUnit.Stance.ATTACK
 		board.clear_potential_moves()
-		admiral.speech_text.text = "Attack stance set!"
+		board.clear_movement_path()
+		board.highlight_attack_range(active_unit)
+		pending_move_order.clear()
+		confirm_button.visible = false
+		admiral.speak("Unit is ready to attack!")
 
 func set_move_stance():
 	if active_unit != null and active_unit.player_unit:
+		# Check if unit already has an order this turn
+		if active_unit in units_with_orders:
+			admiral.speak("This unit already has an order!")
+			return
 		active_unit.stance = ArmyUnit.Stance.MOVE
+		board.clear_potential_attacks()
+		board.clear_attack_target()
 		board.highlight_potential_moves(active_unit)
-		admiral.speech_text.text = "Move stance set!"
+		pending_attack_order.clear()
+		confirm_button.visible = false
+		admiral.speak("Unit is ready to move!")
 
 func execute_move_order(move_order: Dictionary):
 	var unit: ArmyUnit = move_order["unit"]
@@ -673,47 +751,71 @@ func check_units_overlap(unit_a: ArmyUnit, unit_b: ArmyUnit) -> bool:
 func end_turn():
 	# Clear any pending orders and UI
 	board.clear_potential_moves()
+	board.clear_potential_attacks()
+	board.clear_attack_target()
 	board.deselect_tiles()
 	confirm_button.visible = false
 	if active_unit != null:
 		active_unit.stance = ArmyUnit.Stance.DEFEND
 	active_unit = null
 	pending_move_order.clear()
+	pending_attack_order.clear()
 
-	# Clear all movement paths before executing orders
+	# Clear all movement paths and attack targets before executing orders
 	board.clear_all_movement_paths()
+	board.clear_all_attack_targets()
 
 	# Generate opponent orders
 	admiral.speech_text.text = "Opponent planning..."
-	var opponent_orders = generate_opponent_orders()
+	var opponent_move_orders = generate_opponent_move_orders()
+	var opponent_attack_orders = generate_opponent_attack_orders()
 
-	# Combine player and opponent orders
-	var all_orders: Array[Dictionary] = []
-	for order in confirmed_orders:
-		all_orders.append(order)
-	for order in opponent_orders:
-		all_orders.append(order)
+	# Combine player and opponent move orders
+	var all_move_orders: Array[Dictionary] = []
+	for order in confirmed_move_orders:
+		all_move_orders.append(order)
+	for order in opponent_move_orders:
+		all_move_orders.append(order)
 
-	# Execute all orders simultaneously
-	admiral.speech_text.text = "Executing orders..."
-	await execute_all_orders_simultaneously(all_orders)
+	# Combine player and opponent attack orders
+	var all_attack_orders: Array[Dictionary] = []
+	for order in confirmed_attack_orders:
+		all_attack_orders.append(order)
+	for order in opponent_attack_orders:
+		all_attack_orders.append(order)
+
+	# Execute all move orders simultaneously
+	admiral.speech_text.text = "Executing move orders..."
+	await execute_all_orders_simultaneously(all_move_orders)
+
+	# Execute all attack orders
+	admiral.speech_text.text = "Executing attack orders..."
+	await execute_all_attack_orders(all_attack_orders)
 
 	# Clear confirmed orders
-	confirmed_orders.clear()
+	confirmed_move_orders.clear()
+	confirmed_attack_orders.clear()
 
-	# Reset order count
+	# Reset order count and units with orders
 	orders_issued = 0
+	units_with_orders.clear()
+	board.clear_pending_move_destinations()
 
 	# Start new turn
 	admiral.speech_text.text = "Your turn! " + str(max_orders_per_turn) + " orders available."
 
-func generate_opponent_orders() -> Array[Dictionary]:
+func generate_opponent_move_orders() -> Array[Dictionary]:
 	# Simple random move orders for CPU
 	var available_units = opponent_army.duplicate()
 	var opponent_orders: Array[Dictionary] = []
 
-	# Generate opponent orders
-	while opponent_orders.size() < max_orders_per_turn and available_units.size() > 0:
+	# Generate opponent move orders (use half of max orders for movement)
+	@warning_ignore("integer_division")
+	var max_move_orders = max_orders_per_turn / 2
+	if max_move_orders < 1:
+		max_move_orders = 1
+
+	while opponent_orders.size() < max_move_orders and available_units.size() > 0:
 		# Pick random unit
 		var random_index = randi() % available_units.size()
 		var unit = available_units[random_index]
@@ -739,3 +841,166 @@ func generate_opponent_orders() -> Array[Dictionary]:
 				opponent_orders.append(order)
 
 	return opponent_orders
+
+func generate_opponent_attack_orders() -> Array[Dictionary]:
+	# Simple random attack orders for CPU
+	var available_units = opponent_army.duplicate()
+	var opponent_orders: Array[Dictionary] = []
+
+	# Remove units that already have move orders
+	for move_order in generate_opponent_move_orders():
+		available_units.erase(move_order["unit"])
+
+	# Generate opponent attack orders (use remaining orders for attacks)
+	@warning_ignore("integer_division")
+	var max_attack_orders = max_orders_per_turn - (max_orders_per_turn / 2)
+
+	while opponent_orders.size() < max_attack_orders and available_units.size() > 0:
+		# Pick random unit
+		var random_index = randi() % available_units.size()
+		var unit = available_units[random_index]
+		available_units.remove_at(random_index)
+
+		# Calculate attackable tiles
+		var attackable = board.calculate_attack_tiles(unit)
+
+		if attackable.size() > 0:
+			# Pick random target
+			var random_target = attackable[randi() % attackable.size()]
+
+			var order = {
+				"unit": unit,
+				"target": random_target
+			}
+			opponent_orders.append(order)
+
+	return opponent_orders
+
+func execute_all_attack_orders(orders: Array[Dictionary]):
+	if orders.size() == 0:
+		return
+
+	# Calculate attack paths for all orders
+	var attack_data: Array[Dictionary] = []
+	var max_path_length = 0
+
+	for order in orders:
+		var unit: ArmyUnit = order["unit"]
+		var target: Vector2i = order["target"]
+		var path = board.calculate_attack_path(unit.board_position, target, unit.unit_size)
+
+		attack_data.append({
+			"unit": unit,
+			"target": target,
+			"path": path,
+			"current_step": 0,
+			"hit_unit": null,
+			"stopped": false,
+			"is_ranged": unit.is_ranged,
+			"original_position": unit.board_position
+		})
+
+		if path.size() > max_path_length:
+			max_path_length = path.size()
+
+	# Free tiles for melee units before they start moving
+	for data in attack_data:
+		if not data["is_ranged"]:
+			var unit: ArmyUnit = data["unit"]
+			board.free_tiles(unit.board_position, unit.unit_size)
+
+	# Animate all attacks simultaneously, step by step
+	for step in range(max_path_length):
+		# Move each attack projectile/melee unit one step
+		for data in attack_data:
+			if data["stopped"]:
+				continue
+
+			var path: Array = data["path"]
+			if step >= path.size():
+				continue
+
+			var tile_coord: Vector2i = path[step]
+			var unit: ArmyUnit = data["unit"]
+
+			if data["is_ranged"]:
+				# Ranged attack - show projectile
+				# Clear previous tile highlight if not the first step
+				if step > 0:
+					board.clear_attack_projectile(path[step - 1])
+
+				# Highlight current tile
+				board.highlight_attack_projectile(tile_coord)
+			else:
+				# Melee attack - move the unit's body
+				unit.board_position = tile_coord
+				var real_position = Vector3(tile_coord.y * board.unit_dimension, 0.1, tile_coord.x * board.unit_dimension)
+				unit.set_3d_position(real_position)
+
+			# Check if there's a unit on this tile
+			var hit_unit = board.get_unit_on_tile(tile_coord)
+			if hit_unit != null and hit_unit != data["unit"]:
+				# Hit a unit - mark as stopped and record the hit
+				data["hit_unit"] = hit_unit
+				data["stopped"] = true
+
+		# Wait for step delay
+		await get_tree().create_timer(board.attack_step_delay).timeout
+
+	# Clear all remaining projectile highlights (ranged only)
+	for data in attack_data:
+		if data["is_ranged"]:
+			var path: Array = data["path"]
+			if path.size() > 0:
+				var last_step = min(path.size() - 1, max_path_length - 1)
+				if not data["stopped"]:
+					board.clear_attack_projectile(path[last_step])
+				else:
+					# Find the tile where it stopped
+					for i in range(path.size()):
+						if data["hit_unit"] != null:
+							var hit_pos = data["hit_unit"].board_position
+							if path[i] == hit_pos or (data["hit_unit"].unit_size > 1 and is_tile_in_unit_space(path[i], data["hit_unit"])):
+								board.clear_attack_projectile(path[i])
+								break
+
+	# Destroy hit units
+	for data in attack_data:
+		if data["hit_unit"] != null:
+			destroy_unit(data["hit_unit"])
+
+	# Occupy tiles for melee units at their final positions (if they weren't destroyed)
+	for data in attack_data:
+		if not data["is_ranged"]:
+			var unit: ArmyUnit = data["unit"]
+			# Check if unit is still valid (not destroyed by another attack)
+			if is_instance_valid(unit) and unit.visible:
+				board.occupy_tiles(unit)
+
+func is_tile_in_unit_space(tile_coord: Vector2i, unit: ArmyUnit) -> bool:
+	# Check if a tile is within the space occupied by a unit
+	var unit_pos = unit.board_position
+	var unit_size = unit.unit_size
+
+	if tile_coord.x >= unit_pos.x and tile_coord.x < unit_pos.x + unit_size:
+		if tile_coord.y >= unit_pos.y and tile_coord.y < unit_pos.y + unit_size:
+			return true
+	return false
+
+func destroy_unit(unit: ArmyUnit):
+	# Free the tiles the unit was occupying
+	board.free_tiles(unit.board_position, unit.unit_size)
+
+	# Remove from the appropriate army array
+	if unit.player_unit:
+		PlayerArmy.army.erase(unit)
+	else:
+		opponent_army.erase(unit)
+
+	# Hide the unit's panel if it exists
+	if unit.linked_panel != null:
+		unit.linked_panel.visible = false
+
+	# Remove the unit from the scene
+	unit.visible = false
+	unit.queue_free()

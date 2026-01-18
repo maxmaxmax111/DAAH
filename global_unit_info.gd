@@ -24,7 +24,9 @@ extends Node3D
 @export var demon_pawn_size: int
 @export var demon_pawn_move_speed: int
 @export var demon_pawn_flying: bool
-@export var demon_pawn_attack_range: int
+@export var demon_pawn_attack_range: int = 3
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var demon_pawn_attack_type: int = 0
+@export var demon_pawn_is_ranged: bool = true
 @export var demon_pawn_name: String
 @export var demon_pawn_blurb: String
 @export var demon_pawn_instance: Node3D
@@ -34,7 +36,9 @@ extends Node3D
 @export var demon_knight_size: int
 @export var demon_knight_move_speed: int
 @export var demon_knight_flying: bool
-@export var demon_knight_attack_range: int
+@export var demon_knight_attack_range: int = 2
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var demon_knight_attack_type: int = 0
+@export var demon_knight_is_ranged: bool = false
 @export var demon_knight_name: String
 @export var demon_knight_blurb: String
 @export var demon_knight_instance: Node3D
@@ -44,7 +48,9 @@ extends Node3D
 @export var demon_bishop_size: int
 @export var demon_bishop_move_speed: int
 @export var demon_bishop_flying: bool
-@export var demon_bishop_attack_range: int
+@export var demon_bishop_attack_range: int = 4
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var demon_bishop_attack_type: int = 1
+@export var demon_bishop_is_ranged: bool = true
 @export var demon_bishop_name: String
 @export var demon_bishop_blurb: String
 @export var demon_bishop_instance: Node3D
@@ -54,7 +60,9 @@ extends Node3D
 @export var demon_rook_size: int
 @export var demon_rook_move_speed: int
 @export var demon_rook_flying: bool
-@export var demon_rook_attack_range: int
+@export var demon_rook_attack_range: int = 5
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var demon_rook_attack_type: int = 2
+@export var demon_rook_is_ranged: bool = false
 @export var demon_rook_name: String
 @export var demon_rook_blurb: String
 @export var demon_rook_instance: Node3D
@@ -64,7 +72,9 @@ extends Node3D
 @export var demon_queen_size: int
 @export var demon_queen_move_speed: int
 @export var demon_queen_flying: bool
-@export var demon_queen_attack_range: int
+@export var demon_queen_attack_range: int = 6
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var demon_queen_attack_type: int = 1
+@export var demon_queen_is_ranged: bool = true
 @export var demon_queen_name: String
 @export var demon_queen_blurb: String
 @export var demon_queen_instance: Node3D
@@ -74,7 +84,9 @@ extends Node3D
 @export var angel_pawn_size: int
 @export var angel_pawn_move_speed: int
 @export var angel_pawn_flying: bool
-@export var angel_pawn_attack_range: int
+@export var angel_pawn_attack_range: int = 3
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var angel_pawn_attack_type: int = 0
+@export var angel_pawn_is_ranged: bool = true
 @export var angel_pawn_name: String
 @export var angel_pawn_blurb: String
 @export var angel_pawn_instance: Node3D
@@ -84,7 +96,9 @@ extends Node3D
 @export var angel_knight_size: int
 @export var angel_knight_move_speed: int
 @export var angel_knight_flying: bool
-@export var angel_knight_attack_range: int
+@export var angel_knight_attack_range: int = 2
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var angel_knight_attack_type: int = 0
+@export var angel_knight_is_ranged: bool = false
 @export var angel_knight_name: String
 @export var angel_knight_blurb: String
 @export var angel_knight_instance: Node3D
@@ -94,7 +108,9 @@ extends Node3D
 @export var angel_bishop_size: int
 @export var angel_bishop_move_speed: int
 @export var angel_bishop_flying: bool
-@export var angel_bishop_attack_range: int
+@export var angel_bishop_attack_range: int = 4
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var angel_bishop_attack_type: int = 1
+@export var angel_bishop_is_ranged: bool = true
 @export var angel_bishop_name: String
 @export var angel_bishop_blurb: String
 @export var angel_bishop_instance: Node3D
@@ -104,7 +120,9 @@ extends Node3D
 @export var angel_rook_size: int
 @export var angel_rook_move_speed: int
 @export var angel_rook_flying: bool
-@export var angel_rook_attack_range: int
+@export var angel_rook_attack_range: int = 5
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var angel_rook_attack_type: int = 2
+@export var angel_rook_is_ranged: bool = false
 @export var angel_rook_name: String
 @export var angel_rook_blurb: String
 @export var angel_rook_instance: Node3D
@@ -114,7 +132,9 @@ extends Node3D
 @export var angel_queen_size: int
 @export var angel_queen_move_speed: int
 @export var angel_queen_flying: bool
-@export var angel_queen_attack_range: int
+@export var angel_queen_attack_range: int = 6
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var angel_queen_attack_type: int = 1
+@export var angel_queen_is_ranged: bool = true
 @export var angel_queen_name: String
 @export var angel_queen_blurb: String
 @export var angel_queen_instance: Node3D
@@ -124,7 +144,9 @@ extends Node3D
 @export var alien_pawn_size: int
 @export var alien_pawn_move_speed: int
 @export var alien_pawn_flying: bool
-@export var alien_pawn_attack_range: int
+@export var alien_pawn_attack_range: int = 3
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var alien_pawn_attack_type: int = 0
+@export var alien_pawn_is_ranged: bool = true
 @export var alien_pawn_name: String
 @export var alien_pawn_blurb: String
 @export var alien_pawn_instance: Node3D
@@ -134,7 +156,9 @@ extends Node3D
 @export var alien_knight_size: int
 @export var alien_knight_move_speed: int
 @export var alien_knight_flying: bool
-@export var alien_knight_attack_range: int
+@export var alien_knight_attack_range: int = 2
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var alien_knight_attack_type: int = 0
+@export var alien_knight_is_ranged: bool = false
 @export var alien_knight_name: String
 @export var alien_knight_blurb: String
 @export var alien_knight_instance: Node3D
@@ -144,7 +168,9 @@ extends Node3D
 @export var alien_bishop_size: int
 @export var alien_bishop_move_speed: int
 @export var alien_bishop_flying: bool
-@export var alien_bishop_attack_range: int
+@export var alien_bishop_attack_range: int = 4
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var alien_bishop_attack_type: int = 1
+@export var alien_bishop_is_ranged: bool = true
 @export var alien_bishop_name: String
 @export var alien_bishop_blurb: String
 @export var alien_bishop_instance: Node3D
@@ -154,7 +180,9 @@ extends Node3D
 @export var alien_rook_size: int
 @export var alien_rook_move_speed: int
 @export var alien_rook_flying: bool
-@export var alien_rook_attack_range: int
+@export var alien_rook_attack_range: int = 5
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var alien_rook_attack_type: int = 2
+@export var alien_rook_is_ranged: bool = false
 @export var alien_rook_name: String
 @export var alien_rook_blurb: String
 @export var alien_rook_instance: Node3D
@@ -164,7 +192,9 @@ extends Node3D
 @export var alien_queen_size: int
 @export var alien_queen_move_speed: int
 @export var alien_queen_flying: bool
-@export var alien_queen_attack_range: int
+@export var alien_queen_attack_range: int = 6
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var alien_queen_attack_type: int = 1
+@export var alien_queen_is_ranged: bool = true
 @export var alien_queen_name: String
 @export var alien_queen_blurb: String
 @export var alien_queen_instance: Node3D
@@ -174,7 +204,9 @@ extends Node3D
 @export var human_pawn_size: int
 @export var human_pawn_move_speed: int
 @export var human_pawn_flying: bool
-@export var human_pawn_attack_range: int
+@export var human_pawn_attack_range: int = 3
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var human_pawn_attack_type: int = 0
+@export var human_pawn_is_ranged: bool = true
 @export var human_pawn_name: String
 @export var human_pawn_blurb: String
 @export var human_pawn_instance: Node3D
@@ -184,7 +216,9 @@ extends Node3D
 @export var human_knight_size: int
 @export var human_knight_move_speed: int
 @export var human_knight_flying: bool
-@export var human_knight_attack_range: int
+@export var human_knight_attack_range: int = 2
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var human_knight_attack_type: int = 0
+@export var human_knight_is_ranged: bool = false
 @export var human_knight_name: String
 @export var human_knight_blurb: String
 @export var human_knight_instance: Node3D
@@ -194,7 +228,9 @@ extends Node3D
 @export var human_bishop_size: int
 @export var human_bishop_move_speed: int
 @export var human_bishop_flying: bool
-@export var human_bishop_attack_range: int
+@export var human_bishop_attack_range: int = 4
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var human_bishop_attack_type: int = 1
+@export var human_bishop_is_ranged: bool = true
 @export var human_bishop_name: String
 @export var human_bishop_blurb: String
 @export var human_bishop_instance: Node3D
@@ -204,7 +240,9 @@ extends Node3D
 @export var human_rook_size: int
 @export var human_rook_move_speed: int
 @export var human_rook_flying: bool
-@export var human_rook_attack_range: int
+@export var human_rook_attack_range: int = 5
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var human_rook_attack_type: int = 2
+@export var human_rook_is_ranged: bool = false
 @export var human_rook_name: String
 @export var human_rook_blurb: String
 @export var human_rook_instance: Node3D
@@ -214,7 +252,9 @@ extends Node3D
 @export var human_queen_size: int
 @export var human_queen_move_speed: int
 @export var human_queen_flying: bool
-@export var human_queen_attack_range: int
+@export var human_queen_attack_range: int = 6
+@export_enum("PHYSICAL", "MAGICAL", "EXPLOSIVE") var human_queen_attack_type: int = 1
+@export var human_queen_is_ranged: bool = true
 @export var human_queen_name: String
 @export var human_queen_blurb: String
 @export var human_queen_instance: Node3D

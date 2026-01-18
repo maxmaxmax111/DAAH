@@ -177,4 +177,4 @@ func initialize(_unit_type: ArmyUnit.UnitType):
 			unit_blurb.text = UnitInfo.human_queen_blurb
 
 func show_order_buttons(make_visible: bool = true):
-	order_buttons.visible = make_visible
+	print("delete this function!")
