@@ -88,8 +88,9 @@ func get_tile_group(coord: Vector2i, group_size: int):
 
 func occupy_tiles(occupying_unit: ArmyUnit):
 	var tile_group = get_tile_group(occupying_unit.board_position, occupying_unit.unit_size)
-	for t in tile_group:
-		t.occupy_tile(occupying_unit)
+	if tile_group != null:
+		for t in tile_group:
+			t.occupy_tile(occupying_unit)
 
 func free_tiles(tile_position: Vector2i, size: int):
 	var tile_group = get_tile_group(tile_position, size)
@@ -355,6 +356,7 @@ func calculate_attack_tiles(unit: ArmyUnit) -> Array[Vector2i]:
 	var start_pos = unit.board_position
 	var attack_range = unit.attack_range
 	var unit_size = unit.unit_size
+	var is_ranged = unit.is_ranged
 	var added_tiles: Dictionary = {} # Track added tiles to avoid duplicates
 
 	if unit_size == 1:
@@ -393,6 +395,11 @@ func calculate_attack_tiles(unit: ArmyUnit) -> Array[Vector2i]:
 		# Right (from column start_pos.y + 2, rows start_pos.x and start_pos.x + 1)
 		for dist in range(1, attack_range + 1):
 			var col = start_pos.y + 1 + dist
+			# For melee units, check if the unit's body would be out of bounds after moving
+			if not is_ranged:
+				var melee_end_pos = Vector2i(start_pos.x, start_pos.y + dist)
+				if melee_end_pos.y + unit_size > width:
+					break
 			for row_offset in range(2):
 				var target_pos = Vector2i(start_pos.x + row_offset, col)
 				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
@@ -403,6 +410,11 @@ func calculate_attack_tiles(unit: ArmyUnit) -> Array[Vector2i]:
 		# Left (from column start_pos.y - 1, rows start_pos.x and start_pos.x + 1)
 		for dist in range(1, attack_range + 1):
 			var col = start_pos.y - dist
+			# For melee units, check if the unit's body would be out of bounds after moving
+			if not is_ranged:
+				var melee_end_pos = Vector2i(start_pos.x, start_pos.y - dist)
+				if melee_end_pos.y < 0:
+					break
 			for row_offset in range(2):
 				var target_pos = Vector2i(start_pos.x + row_offset, col)
 				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
@@ -413,6 +425,11 @@ func calculate_attack_tiles(unit: ArmyUnit) -> Array[Vector2i]:
 		# Down (from row start_pos.x + 2, columns start_pos.y and start_pos.y + 1)
 		for dist in range(1, attack_range + 1):
 			var row = start_pos.x + 1 + dist
+			# For melee units, check if the unit's body would be out of bounds after moving
+			if not is_ranged:
+				var melee_end_pos = Vector2i(start_pos.x + dist, start_pos.y)
+				if melee_end_pos.x + unit_size > height:
+					break
 			for col_offset in range(2):
 				var target_pos = Vector2i(row, start_pos.y + col_offset)
 				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
@@ -423,6 +440,11 @@ func calculate_attack_tiles(unit: ArmyUnit) -> Array[Vector2i]:
 		# Up (from row start_pos.x - 1, columns start_pos.y and start_pos.y + 1)
 		for dist in range(1, attack_range + 1):
 			var row = start_pos.x - dist
+			# For melee units, check if the unit's body would be out of bounds after moving
+			if not is_ranged:
+				var melee_end_pos = Vector2i(start_pos.x - dist, start_pos.y)
+				if melee_end_pos.x < 0:
+					break
 			for col_offset in range(2):
 				var target_pos = Vector2i(row, start_pos.y + col_offset)
 				if target_pos.y >= 0 and target_pos.y < width and target_pos.x >= 0 and target_pos.x < height:
@@ -453,6 +475,56 @@ func calculate_attack_tiles(unit: ArmyUnit) -> Array[Vector2i]:
 				# Check bounds
 				if target_pos.x < 0 or target_pos.x >= height or target_pos.y < 0 or target_pos.y >= width:
 					break
+
+				# For melee units, check if the unit's body would be out of bounds after moving
+				if not is_ranged:
+					var melee_end_pos = start_pos + direction * dist
+					if melee_end_pos.x < 0 or melee_end_pos.x + unit_size > height:
+						break
+					if melee_end_pos.y < 0 or melee_end_pos.y + unit_size > width:
+						break
+
+				if not added_tiles.has(target_pos):
+					attackable.append(target_pos)
+					added_tiles[target_pos] = true
+
+	elif unit_size == 3:
+		# Size 3 unit: center is the middle tile (offset by 1,1 from start_pos)
+		# Attack vectors originate from center, same as size 1 units
+		var center_pos = Vector2i(start_pos.x + 1, start_pos.y + 1)
+
+		# 8 directions: cardinal + diagonal (same as size 1)
+		var directions = [
+			Vector2i(0, 1),   # right
+			Vector2i(0, -1),  # left
+			Vector2i(1, 0),   # down
+			Vector2i(-1, 0),  # up
+			Vector2i(1, 1),   # down-right
+			Vector2i(1, -1),  # down-left
+			Vector2i(-1, 1),  # up-right
+			Vector2i(-1, -1)  # up-left
+		]
+
+		for direction in directions:
+			for dist in range(1, attack_range + 1):
+				var target_pos = center_pos + direction * dist
+
+				# Check bounds
+				if target_pos.x < 0 or target_pos.x >= height or target_pos.y < 0 or target_pos.y >= width:
+					break
+
+				# Skip tiles that are within the unit's own space
+				if target_pos.x >= start_pos.x and target_pos.x < start_pos.x + unit_size:
+					if target_pos.y >= start_pos.y and target_pos.y < start_pos.y + unit_size:
+						continue
+
+				# For melee units, check if the unit's body would be out of bounds after moving
+				if not is_ranged:
+					var melee_end_pos = start_pos + direction * dist
+					if melee_end_pos.x < 0 or melee_end_pos.x + unit_size > height:
+						break
+					if melee_end_pos.y < 0 or melee_end_pos.y + unit_size > width:
+						break
 
 				if not added_tiles.has(target_pos):
 					attackable.append(target_pos)
@@ -537,14 +609,17 @@ func calculate_attack_path(attacker_pos: Vector2i, target_pos: Vector2i, attacke
 	var diff = target_pos - attacker_pos
 	var direction = Vector2i(sign(diff.x), sign(diff.y))
 
-	# For size 2 units, find the starting position based on direction
+	# Find the starting position based on unit size
 	var start_pos = attacker_pos
 	if attacker_size == 2:
-		# Adjust starting position based on direction
+		# For size 2 units, adjust starting position based on direction
 		if direction.x > 0:
 			start_pos.x += 1
 		if direction.y > 0:
 			start_pos.y += 1
+	elif attacker_size == 3:
+		# For size 3 units, attack originates from center tile (offset by 1,1)
+		start_pos = Vector2i(attacker_pos.x + 1, attacker_pos.y + 1)
 
 	# Build the path from start to target
 	var current_pos = start_pos + direction
